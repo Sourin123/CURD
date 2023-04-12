@@ -1,0 +1,612 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>appointment</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <link rel="canonical" href="https://getbootstrap.com/docs/5.3/examples/footers/">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <link href="https://fonts.googleapis.com/css?family=Raleway" rel="stylesheet">
+    <style>
+        #myVideo {
+  position: fixed;
+  right: 0;
+  bottom: 0;
+  min-width: 100%;
+  min-height: 100%;
+  z-index: -1;
+}
+* {
+  box-sizing: border-box;
+}
+
+
+
+#regForm {
+  margin: 100px auto;
+  font-family: Raleway;
+  padding: 40px;
+  width: 70%;
+  min-width: 300px;
+}
+/* #regFrom:hover{
+  background-color: #ffffff;
+} */
+
+h1 {
+  text-align: center;  
+}
+
+input {
+  padding: 10px;
+  width: 100%;
+  font-size: 17px;
+  font-family: Raleway;
+  border: 1px solid #aaaaaa;
+}
+
+/* Mark input boxes that gets an error on validation: */
+input.invalid {
+  background-color: #ffdddd;
+}
+
+/* Hide all steps by default: */
+.tab {
+  display: none;
+}
+
+button {
+  background-color: #04AA6D;
+  color: #ffffff;
+  border: none;
+  padding: 10px 20px;
+  font-size: 17px;
+  font-family: Raleway;
+  cursor: pointer;
+}
+
+button:hover {
+  opacity: 0.8;
+}
+
+#prevBtn {
+  background-color: #bbbbbb;
+}
+
+/* Make circles that indicate the steps of the form: */
+.step {
+  height: 15px;
+  width: 15px;
+  margin: 0 2px;
+  background-color: #bbbbbb;
+  border: none;  
+  border-radius: 50%;
+  display: inline-block;
+  opacity: 0.5;
+}
+
+.step.active {
+  opacity: 1;
+}
+
+/* Mark the steps that are finished and valid: */
+.step.finish {
+  background-color: #04AA6D;
+}
+</style>
+    </style>
+        
+</head>
+<body>
+
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="bootstrap" viewBox="0 0 118 94">
+          <title>Bootstrap</title>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"></path>
+        </symbol>
+        <symbol id="facebook" viewBox="0 0 16 16">
+          <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+        </symbol>
+        <symbol id="instagram" viewBox="0 0 16 16">
+            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+        </symbol>
+        <symbol id="twitter" viewBox="0 0 16 16">
+          <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+        </symbol>
+      </svg>
+        <header id="header">
+           <!-- <a href="/"> <img src="https://w7.pngwing.com/pngs/281/516/png-transparent-hospital-clinic-medical-logo-cross-symbol-illustration-medical-center-thumbnail.png" alt="" width="50" height="50" > </a>
+            <nav>
+                <ul>
+                  <li><a href="/">Home</a></li>
+                  <li><a href="#">About Us</a></li>
+                  <li><a href="#">Services</a></li>
+                  <li><a href="#">Doctors</a></li>
+                  <li><a href="#">Login</a></li>
+                  <li><a href="#">Signup</a></li>
+                </ul>
+              </nav> -->
+              <div class="container">
+                <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+                  <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                    <!-- <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg> -->
+                    <img src="/asset/img/logo.png" alt="">
+                  </a>
+          
+                  <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                    <li><a href="about" class="nav-link px-2 link-secondary">About</a></li>
+                    <li><a href="deperment" class="nav-link px-2 link-dark">Deperment</a></li>
+                    <li><a href="doctor" class="nav-link px-2 link-dark">Doctors</a></li>
+                    <li><a href="contact_us" class="nav-link px-2 link-dark">Contact Us</a></li>
+                  </ul>
+          
+                  <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                    <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+                  </form>
+          
+                  <div class="dropdown text-end">
+                    <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                      <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                    </a>
+                    <ul class="dropdown-menu text-small">
+                      <li><a class="dropdown-item" href="book">Book aponment</a></li>
+                      <li><a class="dropdown-item" href="#">Settings</a></li>
+                      <li><a class="dropdown-item" href="#">Profile</a></li>
+                      <li><hr class="dropdown-divider"></li>
+                      <li><a class="dropdown-item" href="/">Sign out</a></li>
+                    </ul>
+                  </div>
+                </div>
+              </div>
+        </header>
+        <video autoplay muted loop id="myVideo">
+            <source src="/asset/img/Lake - 83097.mp4" type="video/mp4">
+          </video>
+        <div class="container"> 
+            <form id="regForm" action="/book"  method="post">
+                <h1>Register:</h1>
+                <!-- One "tab" for each step in the form: -->
+                <div class="tab">Name:
+                  <p><input placeholder="First name..." oninput="this.className = ''" name="F_name"></p>
+                  <p><input placeholder="Last name..." oninput="this.className = ''" name="L_name"></p>
+                </div>
+                <div class="tab">Contact Info:
+                  <p><input placeholder="E-mail..." oninput="this.className = ''" name="email"></p>
+                  <p><input placeholder="Phone..." oninput="this.className = ''" name="phone"></p>
+                  <label for="country">Country</label>     
+        
+                  <select id="country" name="Country" class="form-control" required>
+                    <option value="">SELECT Country</option>
+                      <option value="Afghanistan">Afghanistan</option>
+                      <option value="Åland Islands">Åland Islands</option>
+                      <option value="Albania">Albania</option>
+                      <option value="Algeria">Algeria</option>
+                      <option value="American Samoa">American Samoa</option>
+                      <option value="Andorra">Andorra</option>
+                      <option value="Angola">Angola</option>
+                      <option value="Anguilla">Anguilla</option>
+                      <option value="Antarctica">Antarctica</option>
+                      <option value="Antigua and Barbuda">Antigua and Barbuda</option>
+                      <option value="Argentina">Argentina</option>
+                      <option value="Armenia">Armenia</option>
+                      <option value="Aruba">Aruba</option>
+                      <option value="Australia">Australia</option>
+                      <option value="Austria">Austria</option>
+                      <option value="Azerbaijan">Azerbaijan</option>
+                      <option value="Bahamas">Bahamas</option>
+                      <option value="Bahrain">Bahrain</option>
+                      <option value="Bangladesh">Bangladesh</option>
+                      <option value="Barbados">Barbados</option>
+                      <option value="Belarus">Belarus</option>
+                      <option value="Belgium">Belgium</option>
+                      <option value="Belize">Belize</option>
+                      <option value="Benin">Benin</option>
+                      <option value="Bermuda">Bermuda</option>
+                      <option value="Bhutan">Bhutan</option>
+                      <option value="Bolivia">Bolivia</option>
+                      <option value="Bosnia and Herzegovina">Bosnia and Herzegovina</option>
+                      <option value="Botswana">Botswana</option>
+                      <option value="Bouvet Island">Bouvet Island</option>
+                      <option value="Brazil">Brazil</option>
+                      <option value="British Indian Ocean Territory">British Indian Ocean Territory</option>
+                      <option value="Brunei Darussalam">Brunei Darussalam</option>
+                      <option value="Bulgaria">Bulgaria</option>
+                      <option value="Burkina Faso">Burkina Faso</option>
+                      <option value="Burundi">Burundi</option>
+                      <option value="Cambodia">Cambodia</option>
+                      <option value="Cameroon">Cameroon</option>
+                      <option value="Canada">Canada</option>
+                      <option value="Cape Verde">Cape Verde</option>
+                      <option value="Cayman Islands">Cayman Islands</option>
+                      <option value="Central African Republic">Central African Republic</option>
+                      <option value="Chad">Chad</option>
+                      <option value="Chile">Chile</option>
+                      <option value="China">China</option>
+                      <option value="Christmas Island">Christmas Island</option>
+                      <option value="Cocos (Keeling) Islands">Cocos (Keeling) Islands</option>
+                      <option value="Colombia">Colombia</option>
+                      <option value="Comoros">Comoros</option>
+                      <option value="Congo">Congo</option>
+                      <option value="Congo, The Democratic Republic of The">Congo, The Democratic Republic of The</option>
+                      <option value="Cook Islands">Cook Islands</option>
+                      <option value="Costa Rica">Costa Rica</option>
+                      <option value="Cote D'ivoire">Cote D'ivoire</option>
+                      <option value="Croatia">Croatia</option>
+                      <option value="Cuba">Cuba</option>
+                      <option value="Cyprus">Cyprus</option>
+                      <option value="Czech Republic">Czech Republic</option>
+                      <option value="Denmark">Denmark</option>
+                      <option value="Djibouti">Djibouti</option>
+                      <option value="Dominica">Dominica</option>
+                      <option value="Dominican Republic">Dominican Republic</option>
+                      <option value="Ecuador">Ecuador</option>
+                      <option value="Egypt">Egypt</option>
+                      <option value="El Salvador">El Salvador</option>
+                      <option value="Equatorial Guinea">Equatorial Guinea</option>
+                      <option value="Eritrea">Eritrea</option>
+                      <option value="Estonia">Estonia</option>
+                      <option value="Ethiopia">Ethiopia</option>
+                      <option value="Falkland Islands (Malvinas)">Falkland Islands (Malvinas)</option>
+                      <option value="Faroe Islands">Faroe Islands</option>
+                      <option value="Fiji">Fiji</option>
+                      <option value="Finland">Finland</option>
+                      <option value="France">France</option>
+                      <option value="French Guiana">French Guiana</option>
+                      <option value="French Polynesia">French Polynesia</option>
+                      <option value="French Southern Territories">French Southern Territories</option>
+                      <option value="Gabon">Gabon</option>
+                      <option value="Gambia">Gambia</option>
+                      <option value="Georgia">Georgia</option>
+                      <option value="Germany">Germany</option>
+                      <option value="Ghana">Ghana</option>
+                      <option value="Gibraltar">Gibraltar</option>
+                      <option value="Greece">Greece</option>
+                      <option value="Greenland">Greenland</option>
+                      <option value="Grenada">Grenada</option>
+                      <option value="Guadeloupe">Guadeloupe</option>
+                      <option value="Guam">Guam</option>
+                      <option value="Guatemala">Guatemala</option>
+                      <option value="Guernsey">Guernsey</option>
+                      <option value="Guinea">Guinea</option>
+                      <option value="Guinea-bissau">Guinea-bissau</option>
+                      <option value="Guyana">Guyana</option>
+                      <option value="Haiti">Haiti</option>
+                      <option value="Heard Island and Mcdonald Islands">Heard Island and Mcdonald Islands</option>
+                      <option value="Holy See (Vatican City State)">Holy See (Vatican City State)</option>
+                      <option value="Honduras">Honduras</option>
+                      <option value="Hong Kong">Hong Kong</option>
+                      <option value="Hungary">Hungary</option>
+                      <option value="Iceland">Iceland</option>
+                      <option value="India">India</option>
+                      <option value="Indonesia">Indonesia</option>
+                      <option value="Iran, Islamic Republic of">Iran, Islamic Republic of</option>
+                      <option value="Iraq">Iraq</option>
+                      <option value="Ireland">Ireland</option>
+                      <option value="Isle of Man">Isle of Man</option>
+                      <option value="Israel">Israel</option>
+                      <option value="Italy">Italy</option>
+                      <option value="Jamaica">Jamaica</option>
+                      <option value="Japan">Japan</option>
+                      <option value="Jersey">Jersey</option>
+                      <option value="Jordan">Jordan</option>
+                      <option value="Kazakhstan">Kazakhstan</option>
+                      <option value="Kenya">Kenya</option>
+                      <option value="Kiribati">Kiribati</option>
+                      <option value="Korea, Democratic People's Republic of">Korea, Democratic People's Republic of</option>
+                      <option value="Korea, Republic of">Korea, Republic of</option>
+                      <option value="Kuwait">Kuwait</option>
+                      <option value="Kyrgyzstan">Kyrgyzstan</option>
+                      <option value="Lao People's Democratic Republic">Lao People's Democratic Republic</option>
+                      <option value="Latvia">Latvia</option>
+                      <option value="Lebanon">Lebanon</option>
+                      <option value="Lesotho">Lesotho</option>
+                      <option value="Liberia">Liberia</option>
+                      <option value="Libyan Arab Jamahiriya">Libyan Arab Jamahiriya</option>
+                      <option value="Liechtenstein">Liechtenstein</option>
+                      <option value="Lithuania">Lithuania</option>
+                      <option value="Luxembourg">Luxembourg</option>
+                      <option value="Macao">Macao</option>
+                      <option value="Macedonia, The Former Yugoslav Republic of">Macedonia, The Former Yugoslav Republic of</option>
+                      <option value="Madagascar">Madagascar</option>
+                      <option value="Malawi">Malawi</option>
+                      <option value="Malaysia">Malaysia</option>
+                      <option value="Maldives">Maldives</option>
+                      <option value="Mali">Mali</option>
+                      <option value="Malta">Malta</option>
+                      <option value="Marshall Islands">Marshall Islands</option>
+                      <option value="Martinique">Martinique</option>
+                      <option value="Mauritania">Mauritania</option>
+                      <option value="Mauritius">Mauritius</option>
+                      <option value="Mayotte">Mayotte</option>
+                      <option value="Mexico">Mexico</option>
+                      <option value="Micronesia, Federated States of">Micronesia, Federated States of</option>
+                      <option value="Moldova, Republic of">Moldova, Republic of</option>
+                      <option value="Monaco">Monaco</option>
+                      <option value="Mongolia">Mongolia</option>
+                      <option value="Montenegro">Montenegro</option>
+                      <option value="Montserrat">Montserrat</option>
+                      <option value="Morocco">Morocco</option>
+                      <option value="Mozambique">Mozambique</option>
+                      <option value="Myanmar">Myanmar</option>
+                      <option value="Namibia">Namibia</option>
+                      <option value="Nauru">Nauru</option>
+                      <option value="Nepal">Nepal</option>
+                      <option value="Netherlands">Netherlands</option>
+                      <option value="Netherlands Antilles">Netherlands Antilles</option>
+                      <option value="New Caledonia">New Caledonia</option>
+                      <option value="New Zealand">New Zealand</option>
+                      <option value="Nicaragua">Nicaragua</option>
+                      <option value="Niger">Niger</option>
+                      <option value="Nigeria">Nigeria</option>
+                      <option value="Niue">Niue</option>
+                      <option value="Norfolk Island">Norfolk Island</option>
+                      <option value="Northern Mariana Islands">Northern Mariana Islands</option>
+                      <option value="Norway">Norway</option>
+                      <option value="Oman">Oman</option>
+                      <option value="Pakistan">Pakistan</option>
+                      <option value="Palau">Palau</option>
+                      <option value="Palestinian Territory, Occupied">Palestinian Territory, Occupied</option>
+                      <option value="Panama">Panama</option>
+                      <option value="Papua New Guinea">Papua New Guinea</option>
+                      <option value="Paraguay">Paraguay</option>
+                      <option value="Peru">Peru</option>
+                      <option value="Philippines">Philippines</option>
+                      <option value="Pitcairn">Pitcairn</option>
+                      <option value="Poland">Poland</option>
+                      <option value="Portugal">Portugal</option>
+                      <option value="Puerto Rico">Puerto Rico</option>
+                      <option value="Qatar">Qatar</option>
+                      <option value="Reunion">Reunion</option>
+                      <option value="Romania">Romania</option>
+                      <option value="Russian Federation">Russian Federation</option>
+                      <option value="Rwanda">Rwanda</option>
+                      <option value="Saint Helena">Saint Helena</option>
+                      <option value="Saint Kitts and Nevis">Saint Kitts and Nevis</option>
+                      <option value="Saint Lucia">Saint Lucia</option>
+                      <option value="Saint Pierre and Miquelon">Saint Pierre and Miquelon</option>
+                      <option value="Saint Vincent and The Grenadines">Saint Vincent and The Grenadines</option>
+                      <option value="Samoa">Samoa</option>
+                      <option value="San Marino">San Marino</option>
+                      <option value="Sao Tome and Principe">Sao Tome and Principe</option>
+                      <option value="Saudi Arabia">Saudi Arabia</option>
+                      <option value="Senegal">Senegal</option>
+                      <option value="Serbia">Serbia</option>
+                      <option value="Seychelles">Seychelles</option>
+                      <option value="Sierra Leone">Sierra Leone</option>
+                      <option value="Singapore">Singapore</option>
+                      <option value="Slovakia">Slovakia</option>
+                      <option value="Slovenia">Slovenia</option>
+                      <option value="Solomon Islands">Solomon Islands</option>
+                      <option value="Somalia">Somalia</option>
+                      <option value="South Africa">South Africa</option>
+                      <option value="South Georgia and The South Sandwich Islands">South Georgia and The South Sandwich Islands</option>
+                      <option value="Spain">Spain</option>
+                      <option value="Sri Lanka">Sri Lanka</option>
+                      <option value="Sudan">Sudan</option>
+                      <option value="Suriname">Suriname</option>
+                      <option value="Svalbard and Jan Mayen">Svalbard and Jan Mayen</option>
+                      <option value="Swaziland">Swaziland</option>
+                      <option value="Sweden">Sweden</option>
+                      <option value="Switzerland">Switzerland</option>
+                      <option value="Syrian Arab Republic">Syrian Arab Republic</option>
+                      <option value="Taiwan">Taiwan</option>
+                      <option value="Tajikistan">Tajikistan</option>
+                      <option value="Tanzania, United Republic of">Tanzania, United Republic of</option>
+                      <option value="Thailand">Thailand</option>
+                      <option value="Timor-leste">Timor-leste</option>
+                      <option value="Togo">Togo</option>
+                      <option value="Tokelau">Tokelau</option>
+                      <option value="Tonga">Tonga</option>
+                      <option value="Trinidad and Tobago">Trinidad and Tobago</option>
+                      <option value="Tunisia">Tunisia</option>
+                      <option value="Turkey">Turkey</option>
+                      <option value="Turkmenistan">Turkmenistan</option>
+                      <option value="Turks and Caicos Islands">Turks and Caicos Islands</option>
+                      <option value="Tuvalu">Tuvalu</option>
+                      <option value="Uganda">Uganda</option>
+                      <option value="Ukraine">Ukraine</option>
+                      <option value="United Arab Emirates">United Arab Emirates</option>
+                      <option value="United Kingdom">United Kingdom</option>
+                      <option value="United States">United States</option>
+                      <option value="United States Minor Outlying Islands">United States Minor Outlying Islands</option>
+                      <option value="Uruguay">Uruguay</option>
+                      <option value="Uzbekistan">Uzbekistan</option>
+                      <option value="Vanuatu">Vanuatu</option>
+                      <option value="Venezuela">Venezuela</option>
+                      <option value="Viet Nam">Viet Nam</option>
+                      <option value="Virgin Islands, British">Virgin Islands, British</option>
+                      <option value="Virgin Islands, U.S.">Virgin Islands, U.S.</option>
+                      <option value="Wallis and Futuna">Wallis and Futuna</option>
+                      <option value="Western Sahara">Western Sahara</option>
+                      <option value="Yemen">Yemen</option>
+                      <option value="Zambia">Zambia</option>
+                      <option value="Zimbabwe">Zimbabwe</option>
+                  </select>
+                </div>
+                <div class="tab">General Info:
+                  <p><select  name="age" class="form-control" oninput="this.className = ''"><option value="">Select Your Age</option><option value="1">1</option><option value="2">2</option><option value="3">3</option><option value="4">4</option><option value="5">5</option><option value="6">6</option><option value="7">7</option><option value="8">8</option><option value="9">9</option><option value="10">10</option><option value="11">11</option><option value="12">12</option><option value="13">13</option><option value="14">14</option><option value="15">15</option><option value="16">16</option><option value="17">17</option><option value="18">18</option><option value="19">19</option><option value="20">20</option><option value="21">21</option><option value="22">22</option><option value="23">23</option><option value="24">24</option><option value="25">25</option><option value="26">26</option><option value="27">27</option><option value="28">28</option><option value="29">29</option><option value="30">30</option><option value="31">31</option><option value="32">32</option><option value="33">33</option><option value="34">34</option><option value="35">35</option><option value="36">36</option><option value="37">37</option><option value="38">38</option><option value="39">39</option><option value="40">40</option><option value="41">41</option><option value="42">42</option><option value="43">43</option><option value="44">44</option><option value="45">45</option><option value="46">46</option><option value="47">47</option><option value="48">48</option><option value="49">49</option><option value="50">50</option><option value="51">51</option><option value="52">52</option><option value="53">53</option><option value="54">54</option><option value="55">55</option><option value="56">56</option><option value="57">57</option><option value="58">58</option><option value="59">59</option><option value="60">60</option><option value="61">61</option><option value="62">62</option><option value="63">63</option><option value="64">64</option><option value="65">65</option><option value="66">66</option><option value="67">67</option><option value="68">68</option><option value="69">69</option><option value="70">70</option><option value="71">71</option><option value="72">72</option><option value="73">73</option><option value="74">74</option><option value="75">75</option><option value="76">76</option><option value="77">77</option><option value="78">78</option><option value="79">79</option><option value="80">80</option><option value="81">81</option><option value="82">82</option><option value="83">83</option><option value="84">84</option><option value="85">85</option><option value="86">86</option><option value="87">87</option><option value="88">88</option><option value="89">89</option><option value="90">90</option><option value="91">91</option><option value="92">92</option><option value="93">93</option><option value="94">94</option><option value="95">95</option><option value="96">96</option><option value="97">97</option><option value="98">98</option><option value="99">99</option><option value="100">100</option></select></p>
+                  <div class="col-sm-10">Gender :
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" name="Gender" id="gridRadios1" value="M">
+                      <label class="form-check-label" for="gridRadios1">
+                        Male 
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" name="Gender" id="gridRadios2" value="F">
+                      <label class="form-check-label" for="gridRadios2">
+                        Female
+                      </label>
+                    </div>
+                    <div class="form-check form-check-inline">
+                      <input class="form-check-input" type="checkbox" name="Gender" id="gridRadios3" value="T">
+                      <label class="form-check-label" for="gridRadios3">
+                        Transgender
+                      </label>
+                    </div>
+                  </div>
+                  
+                  <p style="margin-top: 20px;"><select name="department"  class="form-control" required><option value="">Select  Department</option><option value="Arthroscopy &amp; Sports Injury Clinic">Arthroscopy &amp; Sports Injury Clinic</option><option value="Cardiology">Cardiology</option><option value="Cardiothoracic &amp; Vascular Surgery">Cardiothoracic &amp; Vascular Surgery</option><option value="Clinical Oncology">Clinical Oncology</option><option value="Critical Care Medicine">Critical Care Medicine</option><option value="Dental">Dental</option><option value="Dermatology">Dermatology</option><option value="Diabetes Clinic">Diabetes Clinic</option><option value="ENT">ENT</option><option value="Gastro Surgery">Gastro Surgery</option><option value="Gastroenterology">Gastroenterology</option><option value="General Medicines">General Medicines</option><option value="General Surgery">General Surgery</option><option value="Nephrology">Nephrology</option><option value="Neuromedicine">Neuromedicine</option><option value="Neurosurgery">Neurosurgery</option><option value="Obstetrics and Gynaecology">Obstetrics and Gynaecology</option><option value="Ophthalmology">Ophthalmology</option><option value="Orthopaedic">Orthopaedic</option><option value="Paediatric Surgery">Paediatric Surgery</option><option value="Paediatrics">Paediatrics</option><option value="Physiotherapy">Physiotherapy</option><option value="Plastic Surgery">Plastic Surgery</option><option value="Psychiatry">Psychiatry</option><option value="Pulmonology">Pulmonology</option><option value="Radiology">Radiology</option><option value="Respiratory Medicine">Respiratory Medicine</option><option value="Rheumatology">Rheumatology</option><option value="Spine Clinic">Spine Clinic</option><option value="Urology">Urology</option><option value="Wellness, Diet &amp; Lifestyle Consultant">Wellness, Diet &amp; Lifestyle Consultant</option></select></p>
+                </div>
+                <div class="tab">disease Info:
+                  <p><input placeholder="disease name..." oninput="this.className = ''" name="disease"></p>
+                  <p>Date of Appointment</p>
+                  <p><input placeholder="date ..." oninput="this.className = ''" name="app_date" type="date"></p>
+                </div>
+                <div style="overflow:auto;">
+                  <div style="float:right;">
+                    <button type="button" id="prevBtn" onclick="nextPrev(-1)">Previous</button>
+                    <button type="button" id="nextBtn" onclick="nextPrev(1)">Next</button>
+                  </div>
+                </div>
+                <!-- Circles which indicates the steps of the form: -->
+                <div style="text-align:center;margin-top:40px;">
+                  <span class="step"></span>
+                  <span class="step"></span>
+                  <span class="step"></span>
+                  <span class="step"></span>
+                </div>
+              </form>
+        </div>
+
+        <script>
+            var currentTab = 0; // Current tab is set to be the first tab (0)
+showTab(currentTab); // Display the current tab
+
+function showTab(n) {
+  // This function will display the specified tab of the form...
+  var x = document.getElementsByClassName("tab");
+  x[n].style.display = "block";
+  //... and fix the Previous/Next buttons:
+  if (n == 0) {
+    document.getElementById("prevBtn").style.display = "none";
+  } else {
+    document.getElementById("prevBtn").style.display = "inline";
+  }
+  if (n == (x.length - 1)) {
+    document.getElementById("nextBtn").innerHTML = "Submit";
+  } else {
+    document.getElementById("nextBtn").innerHTML = "Next";
+  }
+  //... and run a function that will display the correct step indicator:
+  fixStepIndicator(n)
+}
+
+function nextPrev(n) {
+  // This function will figure out which tab to display
+  var x = document.getElementsByClassName("tab");
+  // Exit the function if any field in the current tab is invalid:
+  if (n == 1 && !validateForm()) return false;
+  // Hide the current tab:
+  x[currentTab].style.display = "none";
+  // Increase or decrease the current tab by 1:
+  currentTab = currentTab + n;
+  // if you have reached the end of the form...
+  if (currentTab >= x.length) {
+    // ... the form gets submitted:
+    document.getElementById("regForm").submit();
+    return false;
+  }
+  // Otherwise, display the correct tab:
+  showTab(currentTab);
+}
+
+function validateForm() {
+  // This function deals with validation of the form fields
+  var x, y, i, valid = true;
+  x = document.getElementsByClassName("tab");
+  y = x[currentTab].getElementsByTagName("input");
+  // A loop that checks every input field in the current tab:
+  for (i = 0; i < y.length; i++) {
+    // If a field is empty...
+    if (y[i].value == "") {
+      // add an "invalid" class to the field:
+      y[i].className += " invalid";
+      // and set the current valid status to false
+      valid = false;
+    }
+  }
+  // If the valid status is true, mark the step as finished and valid:
+  if (valid) {
+    document.getElementsByClassName("step")[currentTab].className += " finish";
+  }
+  return valid; // return the valid status
+}
+
+function fixStepIndicator(n) {
+  // This function removes the "active" class of all steps...
+  var i, x = document.getElementsByClassName("step");
+  for (i = 0; i < x.length; i++) {
+    x[i].className = x[i].className.replace(" active", "");
+  }
+  //... and adds the "active" class on the current step:
+  x[n].className += " active";
+}
+        </script>
+
+        <!-- footer starrts -->
+      <div class="container" style="color: #ffffff; ">
+        <footer class="py-5">
+          <div class="row">
+            <div class="col-6 col-md-2 mb-3">
+              <h5>Section</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+              </ul>
+            </div>
+      
+            <div class="col-6 col-md-2 mb-3">
+              <h5>Section</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+              </ul>
+            </div>
+      
+            <div class="col-6 col-md-2 mb-3">
+              <h5>Section</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+              </ul>
+            </div>
+      
+            <div class="col-md-5 offset-md-1 mb-3">
+              <form>
+                <h5>Subscribe to our newsletter</h5>
+                <p>Monthly digest of what's new and exciting from us.</p>
+                <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                  <label for="newsletter1" class="visually-hidden">Email address</label>
+                  <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                  <button class="btn btn-primary" type="button">Subscribe</button>
+                </div>
+              </form>
+            </div>
+          </div>
+      
+          <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+            <p>&copy; 2022 Company, Inc. All rights reserved.</p>
+            <ul class="list-unstyled d-flex">
+              <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+              <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+              <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+            </ul>
+          </div>
+        </footer>
+      </div>
+      <!-- footer ends -->
+</body>
+</html>

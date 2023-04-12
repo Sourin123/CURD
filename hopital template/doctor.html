@@ -1,0 +1,570 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <style>
+        @import url("https://fonts.googleapis.com/css2?family=Montserrat:wght@300;700&display=swap");
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background: rgb(255, 255, 255);
+  height: 100vh;
+  display: grid;
+  place-items: center;
+  font-family: Montserrat;
+  color: #b3afbf;
+}
+
+.card {
+  padding: 15px;
+  width: 350px;
+  background: #222;
+  border-radius: 5px;
+  text-align: center;
+  box-shadow: 0 10px 15px rgba(0, 0, 0, 0.7);
+  user-select: none;
+}
+
+.cover-photo {
+  position: relative;
+  /* background: url(/asset/img/background.jpg); */
+  background: url(/asset/img/back_2.jpg);
+  background-size: cover;
+  height: 180px;
+  border-radius: 5px 5px 0 0;
+}
+
+.profile {
+  position: absolute;
+  width: 120px;
+  bottom: -60px;
+  left: 15px;
+  border-radius: 50%;
+  border: 2px solid #222;
+  background: #222;
+  padding: 5px;
+}
+
+.profile-name {
+  font-size: 20px;
+  margin: 25px 0 0 120px;
+  color: #fff;
+}
+
+.about {
+  margin-top: 30px;
+  line-height: 1.6;
+}
+
+.btn {
+  margin: 30px 15px;
+  background: #7ce3ff;
+  padding: 10px 25px;
+  border-radius: 3px;
+  border: 1px solid #7ce3ff;
+  font-weight: bold;
+  font-family: Montserrat;
+  cursor: pointer;
+  color: #222;
+  transition: 0.2s;
+}
+
+.btn:last-of-type {
+  background: transparent;
+  border-color: #7ce3ff;
+  color: #7ce3ff;
+}
+
+.btn:hover {
+  background: #7ce3ff;
+  color: #222;
+}
+
+.icons {
+  width: 180px;
+  margin: 0 auto 10px;
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.icons i {
+  cursor: pointer;
+  padding: 5px;
+  font-size: 18px;
+  transition: 0.2s;
+}
+
+.icons i:hover {
+  color: #7ce3ff;
+}
+    </style>
+</head>
+<body>
+    <svg xmlns="http://www.w3.org/2000/svg" style="display: none;">
+        <symbol id="bootstrap" viewBox="0 0 118 94">
+          <title>Bootstrap</title>
+          <path fill-rule="evenodd" clip-rule="evenodd" d="M24.509 0c-6.733 0-11.715 5.893-11.492 12.284.214 6.14-.064 14.092-2.066 20.577C8.943 39.365 5.547 43.485 0 44.014v5.972c5.547.529 8.943 4.649 10.951 11.153 2.002 6.485 2.28 14.437 2.066 20.577C12.794 88.106 17.776 94 24.51 94H93.5c6.733 0 11.714-5.893 11.491-12.284-.214-6.14.064-14.092 2.066-20.577 2.009-6.504 5.396-10.624 10.943-11.153v-5.972c-5.547-.529-8.934-4.649-10.943-11.153-2.002-6.484-2.28-14.437-2.066-20.577C105.214 5.894 100.233 0 93.5 0H24.508zM80 57.863C80 66.663 73.436 72 62.543 72H44a2 2 0 01-2-2V24a2 2 0 012-2h18.437c9.083 0 15.044 4.92 15.044 12.474 0 5.302-4.01 10.049-9.119 10.88v.277C75.317 46.394 80 51.21 80 57.863zM60.521 28.34H49.948v14.934h8.905c6.884 0 10.68-2.772 10.68-7.727 0-4.643-3.264-7.207-9.012-7.207zM49.948 49.2v16.458H60.91c7.167 0 10.964-2.876 10.964-8.281 0-5.406-3.903-8.178-11.425-8.178H49.948z"></path>
+        </symbol>
+        <symbol id="facebook" viewBox="0 0 16 16">
+          <path d="M16 8.049c0-4.446-3.582-8.05-8-8.05C3.58 0-.002 3.603-.002 8.05c0 4.017 2.926 7.347 6.75 7.951v-5.625h-2.03V8.05H6.75V6.275c0-2.017 1.195-3.131 3.022-3.131.876 0 1.791.157 1.791.157v1.98h-1.009c-.993 0-1.303.621-1.303 1.258v1.51h2.218l-.354 2.326H9.25V16c3.824-.604 6.75-3.934 6.75-7.951z"/>
+        </symbol>
+        <symbol id="instagram" viewBox="0 0 16 16">
+            <path d="M8 0C5.829 0 5.556.01 4.703.048 3.85.088 3.269.222 2.76.42a3.917 3.917 0 0 0-1.417.923A3.927 3.927 0 0 0 .42 2.76C.222 3.268.087 3.85.048 4.7.01 5.555 0 5.827 0 8.001c0 2.172.01 2.444.048 3.297.04.852.174 1.433.372 1.942.205.526.478.972.923 1.417.444.445.89.719 1.416.923.51.198 1.09.333 1.942.372C5.555 15.99 5.827 16 8 16s2.444-.01 3.298-.048c.851-.04 1.434-.174 1.943-.372a3.916 3.916 0 0 0 1.416-.923c.445-.445.718-.891.923-1.417.197-.509.332-1.09.372-1.942C15.99 10.445 16 10.173 16 8s-.01-2.445-.048-3.299c-.04-.851-.175-1.433-.372-1.941a3.926 3.926 0 0 0-.923-1.417A3.911 3.911 0 0 0 13.24.42c-.51-.198-1.092-.333-1.943-.372C10.443.01 10.172 0 7.998 0h.003zm-.717 1.442h.718c2.136 0 2.389.007 3.232.046.78.035 1.204.166 1.486.275.373.145.64.319.92.599.28.28.453.546.598.92.11.281.24.705.275 1.485.039.843.047 1.096.047 3.231s-.008 2.389-.047 3.232c-.035.78-.166 1.203-.275 1.485a2.47 2.47 0 0 1-.599.919c-.28.28-.546.453-.92.598-.28.11-.704.24-1.485.276-.843.038-1.096.047-3.232.047s-2.39-.009-3.233-.047c-.78-.036-1.203-.166-1.485-.276a2.478 2.478 0 0 1-.92-.598 2.48 2.48 0 0 1-.6-.92c-.109-.281-.24-.705-.275-1.485-.038-.843-.046-1.096-.046-3.233 0-2.136.008-2.388.046-3.231.036-.78.166-1.204.276-1.486.145-.373.319-.64.599-.92.28-.28.546-.453.92-.598.282-.11.705-.24 1.485-.276.738-.034 1.024-.044 2.515-.045v.002zm4.988 1.328a.96.96 0 1 0 0 1.92.96.96 0 0 0 0-1.92zm-4.27 1.122a4.109 4.109 0 1 0 0 8.217 4.109 4.109 0 0 0 0-8.217zm0 1.441a2.667 2.667 0 1 1 0 5.334 2.667 2.667 0 0 1 0-5.334z"/>
+        </symbol>
+        <symbol id="twitter" viewBox="0 0 16 16">
+          <path d="M5.026 15c6.038 0 9.341-5.003 9.341-9.334 0-.14 0-.282-.006-.422A6.685 6.685 0 0 0 16 3.542a6.658 6.658 0 0 1-1.889.518 3.301 3.301 0 0 0 1.447-1.817 6.533 6.533 0 0 1-2.087.793A3.286 3.286 0 0 0 7.875 6.03a9.325 9.325 0 0 1-6.767-3.429 3.289 3.289 0 0 0 1.018 4.382A3.323 3.323 0 0 1 .64 6.575v.045a3.288 3.288 0 0 0 2.632 3.218 3.203 3.203 0 0 1-.865.115 3.23 3.23 0 0 1-.614-.057 3.283 3.283 0 0 0 3.067 2.277A6.588 6.588 0 0 1 .78 13.58a6.32 6.32 0 0 1-.78-.045A9.344 9.344 0 0 0 5.026 15z"/>
+        </symbol>
+      </svg>
+    <header id="header" style="background-color: #fff; width: 100%;">
+        <!-- <a href="/"> <img src="https://w7.pngwing.com/pngs/281/516/png-transparent-hospital-clinic-medical-logo-cross-symbol-illustration-medical-center-thumbnail.png" alt="" width="50" height="50" > </a>
+         <nav>
+             <ul>
+               <li><a href="/">Home</a></li>
+               <li><a href="#">About Us</a></li>
+               <li><a href="#">Services</a></li>
+               <li><a href="#">Doctors</a></li>
+               <li><a href="#">Login</a></li>
+               <li><a href="#">Signup</a></li>
+             </ul>
+           </nav> -->
+           <div class="container">
+             <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+               <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+                 <!-- <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg> -->
+                 <img src="/asset/img/logo.png" alt="">
+               </a>
+       
+               <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+                 <li><a href="#" class="nav-link px-2 link-secondary">About</a></li>
+                 <li><a href="#" class="nav-link px-2 link-dark">Deperment</a></li>
+                 <li><a href="#" class="nav-link px-2 link-dark">Doctors</a></li>
+                 <li><a href="#" class="nav-link px-2 link-dark">Contact Us</a></li>
+               </ul>
+       
+               <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+                 <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+               </form>
+       
+               <div class="dropdown text-end">
+                 <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+                   <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+                 </a>
+                 <ul class="dropdown-menu text-small">
+                   <li><a class="dropdown-item" href="#">Dashboard...</a></li>
+                   <li><a class="dropdown-item" href="#">Settings</a></li>
+                   <li><a class="dropdown-item" href="#">Profile</a></li>
+                   <li><hr class="dropdown-divider"></li>
+                   <li><a class="dropdown-item" href="#">Sign out</a></li>
+                 </ul>
+               </div>
+             </div>
+           </div>
+     </header>
+    <div class="container" style="display: flex; justify-content: space-between;">
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_1.jpg" class="profile">
+            </div>
+            <h3 class="profile-name">Dr William A. Abdu</h3>
+            <p class="about"> M.D, M.S. <br> Orthopedics at <br> Medical Director at Dartmouth-Hitchcock Medical Center</p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_2.jpg" class="profile">
+            </div>
+            <h3 class="profile-name">Dr Myles. B. Abbott</h3>
+            <p class="about">M.D. <br> Child Specialities <br> UCSF Medical Centre </p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_3.jpg" class="profile">
+            </div>
+            <h3 class="profile-name">Dr Fouad. M. Abbas</h3>
+            <p class="about">M.D. <br> Gynecologist/Oncologist <br> Sinai Hospital Of Baltimore</p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+    </div>
+    <div style=" border: 10%; padding: 20px;"></div>
+    <div class="container" style="display: flex; justify-content: space-between;">
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_7.jpg" class="profile">
+            </div>
+            <h3 class="profile-name">Dr. Prosun Sarkar</h3>
+            <p class="about">M.D.,M.B.B.S.( GOLD MEDALIST), M.S., M.C.H. <br> Neurologist <BR>  Mayo Clinic, USA </p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_5.jpg" class="profile">
+            </div>
+            <h3 class="profile-name">Dr Sudhansu Bhattacharyya</h3>
+            <p class="about"> MBBS, MS, MCH <br> General Surgeon <BR> Bombay Hospital And Medical Research Center</p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_6.jpg" class="profile">
+            </div>
+            <h3 class="profile-name"> Dr Mark. F. Aaron</h3>
+            <p class="about">M.D. <br> Cardiologists <br> River Park Hospital, Saint Thomas  </p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+    </div>
+    <div style=" border: 10%; padding: 20px;"></div>
+    <div class="container" style="display: flex; justify-content: space-between;">
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_08.jpg" class="profile">
+            </div>
+            <h3 class="profile-name">Dr. Debjit Dhamali</h3>
+            <p class="about">MDS <br> Dental <BR> Periodontology and Oral Implantology</p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_09.png" class="profile">
+            </div>
+            <h3 class="profile-name">Dr. Arijit Ray</h3>
+            <p class="about"> MBBS, MS, MCH <br> Dermatology <BR> Associate Professor,AIIMS</p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_10.jpg" class="profile">
+            </div>
+            <h3 class="profile-name"> Dr. Rakesh Kumar</h3>
+            <p class="about">M.D. <br> Diabetes Clinic <br> Gestational Diabetes</p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+    </div>
+    <div style=" border: 10%; padding: 20px;"></div>
+    <div class="container" style="display: flex; justify-content: space-between;">
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_11.png" class="profile">
+            </div>
+            <h3 class="profile-name">Dr. Debasmita Roy</h3>
+            <p class="about">MDS <br>Gastroenterology</p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_12.png" class="profile">
+            </div>
+            <h3 class="profile-name">Dr. Satyajit Sahu</h3>
+            <p class="about"> MBBS, MS, MCH <br>Plastic Surgery<BR>Consultant</p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_13.png" class="profile">
+            </div>
+            <h3 class="profile-name"> Dr. Dharmendra Kumar </h3>
+            <p class="about">M.D. <br>Dermatology</p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+    </div>
+    <div style=" border: 10%; padding: 20px;"></div>
+    <div class="container" style="display: flex; justify-content: space-between;">
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_14.jpg" class="profile">
+            </div>
+            <h3 class="profile-name">Dr. Rachna Prasad</h3>
+            <p class="about">MDS <br> ENT </p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_15.png" class="profile">
+            </div>
+            <h3 class="profile-name">Dr. Tania <br> Mukharjee</h3>
+            <p class="about"> MBBS, MS, MCH <br> ENT<BR> Associate Professor,AIIMS</p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_16.png" class="profile">
+            </div>
+            <h3 class="profile-name">Dr. Bydyanath Pathak </h3>
+            <p class="about">M.D. <br>Obstetrics and Gynaecology</p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+    </div>
+    <div style=" border: 10%; padding: 20px;"></div>
+    <div class="container" style="display: flex; justify-content: space-between;">
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_17.jpg" class="profile">
+            </div>
+            <h3 class="profile-name">Dr. Pran Gopal Sarkar</h3>
+            <p class="about">MDS <br> Dental <BR> Periodontology and Oral Implantology</p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_18.jpg" class="profile">
+            </div>
+            <h3 class="profile-name">Dr. Navin Yadav</h3>
+            <p class="about"> MBBS, MS, MCH <br>Orthopaedic<BR> Associate Professor,AIIMS</p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_19.jpg" class="profile">
+            </div>
+            <h3 class="profile-name">Dr. Partha Saha</h3>
+            <p class="about">M.D. <br> Diabetes Clinic <br>Senior Resident</p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+    </div>
+    <div style=" border: 10%; padding: 20px;"></div>
+    <div class="container" style="display: flex; justify-content: space-between;">
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_20.jpg" class="profile">
+            </div>
+            <h3 class="profile-name">Dr. Subhadip Jana</h3>
+            <p class="about">MS (General Surgery)<br> General Surgery <BR>Assistant Professor</p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_21.jpg" class="profile">
+            </div>
+            <h3 class="profile-name">Dr. Imon Paul</h3>
+            <p class="about"> MBBS, MS, MCH <br> Dermatology <BR> Associate Professor,AIIMS</p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+        <div class="card">
+            <div class="cover-photo">
+                <img src="/asset/img/doc_22.jpg" class="profile">
+            </div>
+            <h3 class="profile-name">Aidra Fox</h3>
+            <p class="about">M.D. <br>Gynaecology<br>Senior Resident</p>
+            <button class="btn">Message</button>
+            <button class="btn">Book Appointment</button>
+            <div class="icons">
+                <i class="fa-brands fa-linkedin"></i>
+                <i class="fa-brands fa-github"></i>
+                <i class="fa-brands fa-youtube"></i>
+                <i class="fa-brands fa-twitter"></i>
+            </div>
+        </div>
+    </div>
+    <!-- footer starrts -->
+    <div class="container">
+        <footer class="py-5">
+          <div class="row">
+            <div class="col-6 col-md-2 mb-3">
+              <h5>Section</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+              </ul>
+            </div>
+      
+            <div class="col-6 col-md-2 mb-3">
+              <h5>Section</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+              </ul>
+            </div>
+      
+            <div class="col-6 col-md-2 mb-3">
+              <h5>Section</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+              </ul>
+            </div>
+      
+            <div class="col-md-5 offset-md-1 mb-3">
+              <form>
+                <h5>Subscribe to our newsletter</h5>
+                <p>Monthly digest of what's new and exciting from us.</p>
+                <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                  <label for="newsletter1" class="visually-hidden">Email address</label>
+                  <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                  <button class="btn btn-primary" type="button">Subscribe</button>
+                </div>
+              </form>
+            </div>
+          </div>
+      
+          <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+            <p>&copy; 2022 Company, Inc. All rights reserved.</p>
+            <ul class="list-unstyled d-flex">
+              <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+              <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+              <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+            </ul>
+          </div>
+        </footer>
+      </div>
+      <!-- footer ends -->
+</body>
+</html>

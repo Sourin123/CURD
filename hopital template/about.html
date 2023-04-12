@@ -1,0 +1,421 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    
+  <script>
+    const indicator = document.querySelector(".scroll-indicator");
+
+const scroll = () => {
+  const height = document.documentElement.offsetHeight;
+  const mx = document.documentElement.scrollHeight - document.documentElement.clientHeight;
+  const perc = document.documentElement.scrollTop * 100 / mx;
+  indicator.style.width = perc + "%";
+};
+
+document.addEventListener("scroll", scroll);
+  </script>
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+  <style>
+    @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&display=swap");
+body {
+  padding: 0;
+  margin: 0;
+  height: 100%;
+  font-family: "Roboto", sans-serif;
+}
+
+.scroll-indicator {
+  position: fixed;
+  top: 0;
+  left: 0;
+  height: 4px;
+  background-color: #0061a0;
+  z-index: 2;
+  width: 0%;
+  transition: all 0.3s linear;
+}
+
+.content {
+  dispay: grid;
+  width: 60%;
+  margin: 0 auto;
+  font-size: 16px;
+  font-weight: 300;
+  line-height: 1.8em;
+}
+.content .poster {
+  width: 100%;
+  height: 350px;
+  display: grid;
+  border-radius: 10px;
+  margin-top: 40px;
+  overflow: hidden;
+  background: center no-repeat url(https://images.unsplash.com/photo-1551076805-e1869033e561?ixlib=rb-4.0.3&ixid=MnwxMjA3fDB8MHxzZWFyY2h8NXx8aG9zcGl0YWx8ZW58MHx8MHx8&auto=format&fit=crop&w=1335&q=800);
+  position: relative;
+  box-shadow: 0px 4px 100px -3px #00059733;
+}
+.content .poster .poster-title {
+  position: absolute;
+  bottom: 40px;
+  left: 40px;
+  width: 40%;
+}
+.content .poster .poster-title h1 {
+  font-size: 40px;
+  color: white;
+  font-weight: 300;
+  margin: 20px 0;
+}
+.content .poster .poster-title .line {
+  background-color: #b4c4c5;
+  width: 100%;
+  height: 1px;
+}
+.content .poster .poster-title p {
+  color: #b4c4c5;
+  font-size: 12px;
+  line-height: 1.8em;
+}
+.content .poster .poster-buttons {
+  position: absolute;
+  bottom: 20px;
+  right: 20px;
+  width: 100px;
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  color: white;
+  text-align: center;
+}
+.content .poster .poster-buttons div {
+  cursor: pointer;
+}
+.content .poster .poster-buttons div:hover {
+  color: #ccc;
+}
+
+.footer {
+  width: 100%;
+  min-height: 150px;
+  margin-top: 100px;
+  padding: 100px 0;
+  background: linear-gradient(0deg, #ffffff 0%, #efefef 100%);
+}
+.footer .content {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-column-gap: 20px;
+  font-size: 14px;
+  color: #777;
+}
+
+.info {
+  border-radius: 10px;
+  border: 1px solid #e9e9f6;
+  padding: 20px;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  margin: 40px auto;
+  background-color: #fdfdfd;
+  overflow: hidden;
+  height: 60px;
+}
+.info .block {
+  text-align: center;
+  font-size: 22px;
+  font-weight: 300;
+  color: #242e47;
+}
+.info .block .mini-title {
+  font-size: 12px;
+  color: #999999;
+  font-weight: 700;
+}
+
+.words {
+  padding: 0 0 0 45px;
+  position: relative;
+}
+.words p {
+  margin: 20px auto;
+  position: relative;
+  color: #777;
+}
+.words p .buttons {
+  position: absolute;
+  right: 10px;
+  width: 40px;
+  height: 100px;
+  background-color: #777;
+}
+.words p .letter {
+  font-size: 100px;
+  position: absolute;
+  top: 15px;
+  left: -45px;
+  color: #8787870f;
+  font-weight: 700;
+}
+.words .buttons {
+  position: absolute;
+  opacity: 0;
+  top: 0px;
+  right: -30px;
+  font-size: 20px;
+  transition: all 0.3s linear;
+  cursor: pointer;
+}
+.words:hover .buttons {
+  opacity: 1;
+}
+
+.quote {
+  position: relative;
+  padding: 40px 40px 40px 45px;
+  background-color: #fdfdfd;
+  border-radius: 10px;
+  min-height: 140px;
+  font-size: 22px;
+  line-height: 1.5em;
+  font-family: "Times New Roman", Times, serif;
+  color: #777;
+}
+.quote .letter {
+  font-size: 150px;
+  position: absolute;
+  top: 50px;
+  color: #ebebeb;
+}
+.quote .author {
+  font-size: 12px;
+}
+.quote .author::before {
+  content: "";
+  width: 40px;
+  height: 1px;
+}
+
+@media (max-width: 700px) {
+  .content {
+    width: 90%;
+  }
+
+  .info {
+    grid-template-columns: repeat(2, 1fr);
+    height: 120px;
+  }
+
+  .content .poster {
+    height: 250px;
+  }
+
+  .content .poster .poster-title h1 {
+    font-size: 25px;
+  }
+  .content .poster .poster-title p, .content .poster .poster-title .line {
+    display: none;
+  }
+
+  .quote {
+    font-size: 16px;
+  }
+  .quote .letter {
+    left: 0px;
+  }
+}
+  </style>
+
+</head>
+<body>
+  <header id="header">
+    <!-- <a href="/"> <img src="https://w7.pngwing.com/pngs/281/516/png-transparent-hospital-clinic-medical-logo-cross-symbol-illustration-medical-center-thumbnail.png" alt="" width="50" height="50" > </a>
+     <nav>
+         <ul>
+           <li><a href="/">Home</a></li>
+           <li><a href="#">About Us</a></li>
+           <li><a href="#">Services</a></li>
+           <li><a href="#">Doctors</a></li>
+           <li><a href="#">Login</a></li>
+           <li><a href="#">Signup</a></li>
+         </ul>
+       </nav> -->
+       <div class="container">
+         <div class="d-flex flex-wrap align-items-center justify-content-center justify-content-lg-start">
+           <a href="/" class="d-flex align-items-center mb-2 mb-lg-0 text-dark text-decoration-none">
+             <!-- <svg class="bi me-2" width="40" height="32" role="img" aria-label="Bootstrap"><use xlink:href="#bootstrap"/></svg> -->
+             <img src="/asset/img/logo.png" alt="">
+           </a>
+   
+           <ul class="nav col-12 col-lg-auto me-lg-auto mb-2 justify-content-center mb-md-0">
+             <li><a href="#" class="nav-link px-2 link-secondary">About</a></li>
+             <li><a href="#" class="nav-link px-2 link-dark">Deperment</a></li>
+             <li><a href="#" class="nav-link px-2 link-dark">Doctors</a></li>
+             <li><a href="#" class="nav-link px-2 link-dark">Contact Us</a></li>
+           </ul>
+   
+           <form class="col-12 col-lg-auto mb-3 mb-lg-0 me-lg-3" role="search">
+             <input type="search" class="form-control" placeholder="Search..." aria-label="Search">
+           </form>
+   
+           <div class="dropdown text-end">
+             <a href="#" class="d-block link-dark text-decoration-none dropdown-toggle" data-bs-toggle="dropdown" aria-expanded="false">
+               <img src="https://github.com/mdo.png" alt="mdo" width="32" height="32" class="rounded-circle">
+             </a>
+             <ul class="dropdown-menu text-small">
+               <li><a class="dropdown-item" href="#">Dashboard...</a></li>
+               <li><a class="dropdown-item" href="#">Settings</a></li>
+               <li><a class="dropdown-item" href="#">Profile</a></li>
+               <li><hr class="dropdown-divider"></li>
+               <li><a class="dropdown-item" href="#">Sign out</a></li>
+             </ul>
+           </div>
+         </div>
+       </div>
+ </header>
+     <div class="wrapper">
+        <div class="scroll-indicator"></div>
+        <div class="content-wrapper">
+          <div class="content">
+            <div class="poster">
+              <div class="poster-title" style="display: flex;">
+                <h1> ABOUT </h1><h1 style="color: #0061a0;"> MEDICAL CARE </h1>
+                <div class="line"></div>
+                <!-- <p>Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus voluptate, laboriosam sunt eveniet eius iure, sapiente in maiores quasi saepe quas quisquam obcaecati odio </p> -->
+              </div>
+              <div class="poster-buttons">
+                <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
+                <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></div>
+                <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M19 21l-7-5-7 5V5a2 2 0 0 1 2-2h10a2 2 0 0 1 2 2z"></path></svg></div>
+              </div>
+            </div>
+            <!-- <div class="info">
+              <div class="block published">
+                <div class="mini-title">Published</div>
+                12.09.2022
+              </div>
+              <div class="block published">
+                <div class="mini-title">Views</div>
+                3 251
+              </div>
+              <div class="block published">
+                <div class="mini-title">Likes</div>
+                156
+              </div>
+              <div class="block published">
+                <div class="mini-title">Reading</div>
+                12 min
+              </div>
+            </div> -->
+            <div class="words">
+              <p>
+                <font class="letter">L</font>
+              <!-- Lorem ipsum dolor sit amet consectetur adipisicing elit. Ducimus voluptate, laboriosam sunt eveniet eius iure, sapiente in maiores quasi saepe quas quisquam obcaecati odio exercitationem rerum, molestias aliquid ipsa excepturi laborum quaerat! Tempora necessitatibus culpa possimus maiores doloremque ipsa nemo incidunt, eos alias voluptatibus, minima obcaecati vel qui, repudiandae ullam! Ipsam cupiditate officia molestiae quas praesentium deleniti dolores quia repellat quasi dolore? Nihil distinctio a adipisci dolorem accusantium cupiditate quibusdam in, ipsum laudantium minima vero ad atque sequi earum? Debitis dolore neque a odio mollitia harum blanditiis tempore ea nam? Earum a sed odit consectetur temporibus facere vel, fugit pariatur?</p> -->
+              MEDICAL CARE  Hospital is a multi/super speciality hospital located at the prime location of Vaishnodevi Circle, SG Road, Ahmedabad; with state-of-the-art facilities & treatments at an affordable cost, encompassing wide spectrum of accurate diagnostics and elegant therapeutics created on the philosophical edifice of patient and ethical centricity ensuring humanistic dispensation.</p>
+                    <!-- <p>
+                      <font class="letter">D</font>
+              Dolor sit amet, consectetur adipisicing elit. Rem dolorem possimus delectus officia aspernatur rerum repellendus quos necessitatibus sed! Deserunt dolor maxime accusantium, vero nostrum ipsam iure hic repellendus, eum numquam fugiat quo fuga ducimus minima veritatis. Deserunt dolor maxime accusantium, vero nostrum ipsam iure hic repellendus, eum numquam fugiat quo fuga ducimus minima veritatis.</p>
+                          <p> 
+                            
+      
+                      <font class="letter">S</font>
+              <!-- Sit amet, consectetur adipisicing elit. Rem dolorem possimus delectus officia aspernatur rerum repellendus quos necessitatibus sed! Deserunt dolor maxime accusantium, vero nostrum ipsam iure hic repellendus, eum numquam fugiat quo fuga ducimus minima veritatis. Deserunt dolor maxime accusantium, vero nostrum ipsam iure hic repellendus, eum numquam fugiat quo fuga ducimus minima veritatis. Dolor sit amet, consectetur adipisicing elit. Rem dolorem possimus delectus officia aspernatur rerum repellendus quos necessitatibus sed! Deserunt dolor maxime accusantium.</p>  -->
+              <div class="buttons">
+                <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
+                <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></div>  
+              </div>
+            </div>
+            <div class="quote">
+              <p> <font class="letter">“</font>
+                As a leading health organization in our region, we want to be a strong influence for better health and prevention, and there’s no better place to start than among our own employees.
+              </p>
+              <p class="author">CEO Harshil Patel</p>
+            </div>
+            <div class="words">
+              <p><font class="letter">S</font>
+              <!-- Sit amet, consectetur adipisicing elit. Rem dolorem possimus delectus officia aspernatur rerum repellendus quos necessitatibus sed! Deserunt dolor maxime accusantium, vero nostrum ipsam iure hic repellendus, eum numquam fugiat quo fuga ducimus minima veritatis. Deserunt dolor maxime accusantium, vero nostrum ipsam iure hic repellendus, eum numquam fugiat quo fuga ducimus minima veritatis. Dolor sit amet, consectetur adipisicing elit. Rem dolorem possimus delectus officia aspernatur rerum repellendus quos necessitatibus sed! Deserunt dolor maxime accusantium,</p> -->
+              It’s one thing to say you put patients first. It’s completely different to actually embed that mantra into every department and interaction. Whether it’s something as simple as posting a wayfinding sign to guide patients to the right place, or as complex as implementing enterprise technology for clinicians, at every turn these hospitals are asking ‘How will this impact our patients?’ Every employee, whether or not they have a clinical or patient-facing role, has a patient-centric mindset and ‘patients come first’ is embedded in their DNA. </p>
+              
+              <p>
+                <font class="letter">D</font>
+        <!-- Dolor sit amet, consectetur adipisicing elit. Rem dolorem possimus delectus officia aspernatur rerum repellendus quos necessitatibus sed! Deserunt dolor maxime accusantium, vero nostrum ipsam iure hic repellendus, eum numquam fugiat quo fuga ducimus minima veritatis. Deserunt dolor maxime accusantium, vero nostrum ipsam iure hic repellendus, eum numquam fugiat quo fuga ducimus minima veritatis.</p> -->
+        You probably knew this one was coming if you already saw our news release: Hospitals honored on the U.S. News & World Report Best Hospitals list trust Spok for clinical communication. Over the past decade, nearly every hospital named to the Best Hospitals honor roll has used or continues to use Spok solutions. This year, 18 of 20 hospitals on the adult hospitals honor roll and 10 of 10 of the children’s hospitals rely on Spok. Each organization leverages Spok solutions to facilitate smarter, faster communication among their care teams. They all use it in their own way—they each have their own unique workflows, diverse device mix, and so on—but what’s most important is that they can count on it. 
+
+        Staff at Spok hospitals know that when they send a message it will arrive at the expected destination. When a patient hits their nurse call button or a patient monitoring device or clinical surveillance system indicates that something is going wrong, that notification is automatically sent to the right person or the right team for rapid response. When a loved one calls into the contact center to check on the status of a patient, the operator can quickly relay valuable information and provide some peace of mind. </p>
+              <div class="buttons">
+                <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"></path></svg></div>
+                <div><svg viewBox="0 0 24 24" width="24" height="24" stroke="currentColor" stroke-width="2" fill="none" stroke-linecap="round" stroke-linejoin="round" class="css-i6dzq1"><path d="M17 3a2.828 2.828 0 1 1 4 4L7.5 20.5 2 22l1.5-5.5L17 3z"></path></svg></div>  
+              </div>
+            </div>
+            <div class="author">
+              <div class="image"></div>
+            </div>
+          </div>
+        </div>
+      </div>
+    <!-- footer starrts -->
+    <div class="container">
+        <footer class="py-5">
+          <div class="row">
+            <div class="col-6 col-md-2 mb-3">
+              <h5>Section</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+              </ul>
+            </div>
+      
+            <div class="col-6 col-md-2 mb-3">
+              <h5>Section</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+              </ul>
+            </div>
+      
+            <div class="col-6 col-md-2 mb-3">
+              <h5>Section</h5>
+              <ul class="nav flex-column">
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Home</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Features</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">Pricing</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">FAQs</a></li>
+                <li class="nav-item mb-2"><a href="#" class="nav-link p-0 text-muted">About</a></li>
+              </ul>
+            </div>
+      
+            <div class="col-md-5 offset-md-1 mb-3">
+              <form>
+                <h5>Subscribe to our newsletter</h5>
+                <p>Monthly digest of what's new and exciting from us.</p>
+                <div class="d-flex flex-column flex-sm-row w-100 gap-2">
+                  <label for="newsletter1" class="visually-hidden">Email address</label>
+                  <input id="newsletter1" type="text" class="form-control" placeholder="Email address">
+                  <button class="btn btn-primary" type="button">Subscribe</button>
+                </div>
+              </form>
+            </div>
+          </div>
+      
+          <div class="d-flex flex-column flex-sm-row justify-content-between py-4 my-4 border-top">
+            <p>&copy; 2022 Company, Inc. All rights reserved.</p>
+            <ul class="list-unstyled d-flex">
+              <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#twitter"/></svg></a></li>
+              <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#instagram"/></svg></a></li>
+              <li class="ms-3"><a class="link-dark" href="#"><svg class="bi" width="24" height="24"><use xlink:href="#facebook"/></svg></a></li>
+            </ul>
+          </div>
+        </footer>
+      </div>
+      <!-- footer ends -->
+</body>
+</html>

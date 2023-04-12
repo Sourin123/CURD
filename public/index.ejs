@@ -1,0 +1,583 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+    <title>Document</title>
+    <style>
+        @charset "UTF-8";
+        @import url("https://fonts.googleapis.com/css2?family=Roboto:wght@300;400;500;700&display=swap");  
+        .bd-placeholder-img {
+          font-size: 1.125rem;
+          text-anchor: middle;
+          -webkit-user-select: none;
+          -moz-user-select: none;
+          user-select: none;
+        }
+  
+        @media (min-width: 768px) {
+          .bd-placeholder-img-lg {
+            font-size: 3.5rem;
+          }
+        }
+  
+        .b-example-divider {
+          height: 3rem;
+          background-color: rgba(0, 0, 0, .1);
+          border: solid rgba(0, 0, 0, .15);
+          border-width: 1px 0;
+          box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+        }
+  
+        .b-example-vr {
+          flex-shrink: 0;
+          width: 1.5rem;
+          height: 100vh;
+        }
+  
+        .bi {
+          vertical-align: -.125em;
+          fill: currentColor;
+        }
+  
+        .nav-scroller {
+          position: relative;
+          z-index: 2;
+          height: 2.75rem;
+          overflow-y: hidden;
+        }
+  
+        .nav-scroller .nav {
+          display: flex;
+          flex-wrap: nowrap;
+          padding-bottom: 1rem;
+          margin-top: -1px;
+          overflow-x: auto;
+          text-align: center;
+          white-space: nowrap;
+          -webkit-overflow-scrolling: touch;
+        }
+        section.pricing-section {
+width: 100%;
+height: 100vh;
+}
+section.pricing-section .pricing {
+width: 100%;
+height: 100%;
+position: relative;
+}
+section.pricing-section .pricing .pricing-header {
+position: absolute;
+top: 0;
+left: 50%;
+transform: translateX(-50%);
+background-color: #bc1e4a;
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+row-gap: 12px;
+padding: 20px 70px;
+border-radius: 0px 0px 8px 8px;
+}
+section.pricing-section .pricing .pricing-header p {
+font-weight: 300;
+}
+section.pricing-section .pricing .pricing-header h3 {
+font-weight: 500;
+display: flex;
+align-items: center;
+column-gap: 5px;
+}
+section.pricing-section .pricing .pricing-body {
+display: flex;
+flex-direction: column;
+align-items: center;
+row-gap: 25px;
+position: absolute;
+top: 50%;
+left: 50%;
+transform: translate(-50%, -50%);
+}
+section.pricing-section .pricing .pricing-body .pricing-body-header {
+display: flex;
+flex-direction: column;
+justify-content: center;
+align-items: center;
+row-gap: 15px;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-header h2 {
+font-weight: 500;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-header .pricing-checkbox {
+display: flex;
+column-gap: 10px;
+align-items: center;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-header .pricing-checkbox span {
+font-size: 14px;
+color: #b5b6b8;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-header .pricing-checkbox > div {
+width: 45px;
+background: #bc1e4a;
+height: 24px;
+border-radius: 15px;
+position: relative;
+cursor: pointer;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-header .pricing-checkbox > div div {
+position: absolute;
+width: 18px;
+height: 18px;
+background-color: #fff;
+top: 50%;
+left: 3px;
+transform: translateY(-50%);
+border-radius: 50%;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-header .pricing-checkbox > div.anually div {
+left: unset;
+right: 3px;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-plans > div {
+display: none;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-plans > div > div {
+display: flex;
+column-gap: 17px;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-plans > div > div .card {
+background-color: #22262c;
+padding: 25px;
+border-radius: 8px;
+width: 270px;
+position: relative;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-plans > div > div .card .card-header {
+display: flex;
+flex-direction: column;
+row-gap: 8px;
+justify-content: center;
+align-items: center;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-plans > div > div .card .card-header .card-title {
+font-weight: 400;
+font-size: 14px;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-plans > div > div .card .card-header .card-price {
+font-size: 26px;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-plans > div > div .card .card-header .card-users input {
+width: 100%;
+background: transparent;
+border: 1px solid #35393e;
+padding: 10px;
+color: #b5b6b8;
+text-align: center;
+outline: none;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-plans > div > div .card .card-header .card-users span {
+font-size: 12px;
+color: #bc1e4a;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-plans > div > div .card .card-body {
+margin-top: 30px;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-plans > div > div .card .card-body ul {
+list-style-type: none;
+margin-left: 20px;
+display: flex;
+flex-direction: column;
+row-gap: 8px;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-plans > div > div .card .card-body ul li {
+color: #b5b6b8;
+position: relative;
+font-size: 14px;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-plans > div > div .card .card-body ul li::before {
+content: "•";
+color: #bc1e4a;
+font-weight: bold;
+width: 20px;
+margin-left: -18px;
+font-size: 25px;
+position: absolute;
+top: 50%;
+transform: translateY(-50%);
+}
+section.pricing-section .pricing .pricing-body .pricing-body-plans > div > div .card .card-footer {
+margin-top: 35px;
+display: flex;
+justify-content: center;
+align-items: center;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-plans > div > div .card .card-footer button {
+border: 1px solid #bc1e4a;
+background: transparent;
+padding: 10px 25px;
+color: #b5b6b8;
+cursor: pointer;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-plans > div > div .card .card-footer button:hover {
+background: #bc1e4a;
+color: #fff;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-plans > div > div .card:nth-of-type(2) .card-footer button {
+background: #bc1e4a;
+color: #fff;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-plans > div > div .card:nth-of-type(2) .card-footer button:hover {
+background: transparent;
+color: #b5b6b8;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-plans > div.active {
+display: block;
+}
+
+@media screen and (max-width: 900px) {
+section.pricing-section {
+  width: 100%;
+  height: auto;
+}
+section.pricing-section .pricing .pricing-header {
+  width: 60%;
+  padding: 20px 50px;
+}
+section.pricing-section .pricing .pricing-body {
+  margin-top: 780px;
+  padding-bottom: 50px;
+}
+section.pricing-section .pricing .pricing-body .pricing-body-plans > div > div {
+  flex-direction: column;
+  row-gap: 17px;
+}
+}
+@media screen and (max-width: 500px) {
+section.pricing-section .pricing .pricing-header {
+  width: 100%;
+  padding: 20px 50px;
+  position: unset;
+  top: unset;
+  left: unset;
+  transform: unset;
+}
+section.pricing-section .pricing .pricing-header p {
+  font-size: 14px;
+}
+section.pricing-section .pricing .pricing-header h3 {
+  font-size: 18px;
+}
+section.pricing-section .pricing .pricing-body {
+  margin-top: 50px;
+  position: unset;
+  top: unset;
+  left: unset;
+  transform: unset;
+}
+}
+      </style>
+</head>
+<body>
+    <%- include('common/header'); -%>
+    <%- include('common/slide'); -%>
+    <img src="./img_05.jpg" alt="">
+    
+    
+      <!-- sbout start  -->
+
+      <div class="container content-md welcomeSection">
+        <div class="row section1">
+        <div class="col-md-6" style="margin-bottom: 40px;">
+          <h2 class="title-v2">WELCOME TO <span style="color: #2c42c0;"> MEDICAL CARE  </span></h2>
+          <p style="text-align: justify; font-size: 14px;">A state-of-the art modern facility in the heart of the Gujarat state, it is spread over 10 acres and has a built-up area of over 440000 square feet. Currently the hospital has 300+ beds with a capacity to expand to 400 beds.</p>
+          <p style="text-align: justify; font-size: 14px;">Unity Hospital, Ahmedabad is a tertiary care flagship unit of the Unity Hospitals Group.The Hospital focuses on centres of excellence like Cardiac Sciences, Neuro Sciences, Orthopaedics including Knee Replacement, Hip Replacement and Spine Surgery, Cancer, Emergency Medicine and Solid Organ Transplants besides the complete range of more than 35 allied medical disciplines under the same roof.</p> 
+          <p style="text-align: justify; font-size: 14px;"> Unity Hospital, Ahmedabad provides holistic healthcare that includes prevention, treatment, rehabilitation and health education for patients, their families and clients by touching their lives.</p> <br>
+          <a href="about" class="btn-u btn-brd btn-brd-hover">Read More</a>
+        </div>
+        <div class="col-md-6 overflow-h">
+          <img style="border-radius: 50px; margin-left: 30px;" src="https://nirravv.github.io/Hospital-Management-Html/assets/img/bg/1.jpg" alt="">
+        </div>
+        </div>
+        </div>
+
+        <!-- featurs -->
+      <div class="b-example-divider"></div>
+
+      <div class="container px-4 py-5" id="hanging-icons">
+        <h2 class="pb-2 border-bottom">Our Specialities</h2>
+        <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+          <div class="col d-flex align-items-start">
+            <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+              <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"/></svg>
+            </div>
+            <div>
+              <h3 class="fs-2">24/7 Ambulance support</h3>
+              <p>24 Hours Ambulance Service, Emergency Ambulance Service Providers in India.</p>
+              <a href="#" class="btn btn-primary">
+                see more 
+              </a>
+            </div>
+          </div>
+          <div class="col d-flex align-items-start">
+            <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+              <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"/></svg>
+            </div>
+            <div>
+              <h3 class="fs-2">Dedicated Stroke Centre</h3>
+              <p>We specially have dedicated stroke centre which is very handy in critical situations.</p>
+              <a href="#" class="btn btn-primary">
+                see more
+              </a>
+            </div>
+          </div>
+          <div class="col d-flex align-items-start">
+            <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+              <svg class="bi" width="1em" height="1em"><use xlink:href="#tools"/></svg>
+            </div>
+            <div>
+              <h3 class="fs-2">Joint Replacement Centre</h3>
+              <p>We have have dedicated Joint Replacement Centre.</p>
+              <a href="#" class="btn btn-primary">
+                See more
+              </a>
+            </div>
+          </div>
+          
+        </div>
+        <div class="container px-4 py-5" id="hanging-icons">
+          <!-- <h2 class="pb-2 border-bottom">Hanging icons</h2> -->
+          <div class="row g-4 py-5 row-cols-1 row-cols-lg-3">
+            <div class="col d-flex align-items-start">
+              <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#toggles2"/></svg>
+              </div>
+              <div>
+                <h3 class="fs-2">LASIK Vision Correction Treatment</h3>
+                <p>We have LASIK Vision treatment which is the latest in the world.</p>
+                <a href="#" class="btn btn-primary">
+                  See more
+                </a>
+              </div>
+            </div>
+            <div class="col d-flex align-items-start">
+              <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#cpu-fill"/></svg>
+              </div>
+              <div>
+                <h3 class="fs-2">17 State-of-the-art Operation Theatres</h3>
+                <p>These Operation Theatres are full of latest technologies and equipments.</p>
+                <a href="#" class="btn btn-primary">
+                  See more
+                </a>
+              </div>
+            </div>
+            <div class="col d-flex align-items-start">
+              <div class="icon-square text-bg-light d-inline-flex align-items-center justify-content-center fs-4 flex-shrink-0 me-3">
+                <svg class="bi" width="1em" height="1em"><use xlink:href="#tools"/></svg>
+              </div>
+              <div>
+                <h3 class="fs-2">2 Endoscopy Suites</h3>
+                <p>2 Endoscopy Suites are with latest equipments and very faster as compared to others.</p>
+                <a href="#" class="btn btn-primary">
+                  See more
+                </a>
+              </div>
+            </div>
+            
+          </div>
+      </div>
+
+      
+      
+      <!-- feturs ends  -->
+
+      <!-- blog starts  -->
+      <div class="container">
+        <!-- <nav class="navbar navbar-expand-lg navbar-light bg-light">
+            <div class="container-fluid">
+              <a class="navbar-brand" href="#">Themesberg</a>
+              <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+              </button>
+              <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                <ul class="navbar-nav mr-auto mb-2 mb-lg-0">
+                  <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="./index.html">Home</a>
+                  </li>
+                  <li class="nav-item">
+                    <a class="nav-link" href="./blog.html">Blog</a>
+                  </li>
+                </ul>
+                <form class="d-flex">
+                  <input class="form-control mr-2" type="search" placeholder="Search" aria-label="Search">
+                  <button class="btn btn-outline-success" type="submit">Search</button>
+                </form>
+              </div>
+            </div>
+          </nav> -->
+          <div class="container my-5">
+              <div class="row d-flex justify-content-center">
+                  <div class="col-12">
+                    <div id="carousel" class="carousel slide" data-ride="carousel">
+                        <ol class="carousel-indicators">
+                            <li data-target="#carousel" data-slide-to="0" class="active bg-secondary"></li>
+                            <li data-target="#carousel" data-slide-to="1" class="bg-secondary"></li>
+                            <li data-target="#carousel" data-slide-to="2" class="bg-secondary"></li>
+                          </ol>
+                        <div class="carousel-inner">
+                          <div class="carousel-item active">
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-xl-3 mb-4">
+                                    <div class="card mr-3">
+                                        <img src="https://themesberg.s3.us-east-2.amazonaws.com/public/posts/bootstrap-themes-summer-sale.jpg" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                          <h5 class="card-title">35% discount for premium Bootstrap Themes, Templates, UI Kits</h5>
+                                          <p class="card-text">We’re getting nearer to the end of summer and because we know that this period can make a serious dent in your pocket..</p>
+                                          <a href="#" class="btn btn-primary">Read more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-3 mb-4">
+                                    <div class="card mr-3">
+                                        <img src="https://themesberg.s3.us-east-2.amazonaws.com/public/posts/gpt-3-tailwind-css-code-generator.jpg" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                          <h5 class="card-title">We built an OpenAI powered Tailwind CSS code generator using GPT-3</h5>
+                                          <p class="card-text">A couple of days ago we got access to the OpenAI’s Beta API platform and I had the occasion to play around with it...</p>
+                                          <a href="#" class="btn btn-primary">Read more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-3 mb-4">
+                                    <div class="card mr-3">
+                                        <img src="https://themesberg.s3.us-east-2.amazonaws.com/public/posts/bootstrap-5-tutorial/bootstrap-5-tutorial.jpg" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                          <h5 class="card-title">Bootstrap 5 tutorial: learn how to get started without jQuery</h5>
+                                          <p class="card-text">We’re getting nearer to the end of summer and because we know that this period can make a serious dent in your pocket..</p>
+                                          <a href="#" class="btn btn-primary">Read more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-3 mb-4">
+                                    <div class="card mr-3">
+                                        <img src="https://themesberg.s3.us-east-2.amazonaws.com/public/posts/angular-10/angular-10-officially-released-dropping-ie-9-10.jpg" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                          <h5 class="card-title">Angular 10 officially released deprecating support for IE 9 and 10</h5>
+                                          <p class="card-text">If you’ve been using Angular for your web projects I’m glad to let you know that following this major update to version...</p>
+                                          <a href="#" class="btn btn-primary">Read more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-xl-3 mb-4">
+                                    <div class="card mr-3">
+                                        <img src="https://themesberg.s3.us-east-2.amazonaws.com/public/posts/bootstrap-themes-summer-sale.jpg" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                          <h5 class="card-title">35% discount for premium Bootstrap Themes, Templates, UI Kits</h5>
+                                          <p class="card-text">We’re getting nearer to the end of summer and because we know that this period can make a serious dent in your pocket..</p>
+                                          <a href="#" class="btn btn-primary">Read more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-3 mb-4">
+                                    <div class="card mr-3">
+                                        <img src="https://themesberg.s3.us-east-2.amazonaws.com/public/posts/gpt-3-tailwind-css-code-generator.jpg" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                          <h5 class="card-title">We built an OpenAI powered Tailwind CSS code generator using GPT-3</h5>
+                                          <p class="card-text">A couple of days ago we got access to the OpenAI’s Beta API platform and I had the occasion to play around with it...</p>
+                                          <a href="#" class="btn btn-primary">Read more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-3 mb-4">
+                                    <div class="card mr-3">
+                                        <img src="https://themesberg.s3.us-east-2.amazonaws.com/public/posts/bootstrap-5-tutorial/bootstrap-5-tutorial.jpg" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                          <h5 class="card-title">Bootstrap 5 tutorial: learn how to get started without jQuery</h5>
+                                          <p class="card-text">We’re getting nearer to the end of summer and because we know that this period can make a serious dent in your pocket..</p>
+                                          <a href="#" class="btn btn-primary">Read more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-3 mb-4">
+                                    <div class="card mr-3">
+                                        <img src="https://themesberg.s3.us-east-2.amazonaws.com/public/posts/angular-10/angular-10-officially-released-dropping-ie-9-10.jpg" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                          <h5 class="card-title">Angular 10 officially released deprecating support for IE 9 and 10</h5>
+                                          <p class="card-text">If you’ve been using Angular for your web projects I’m glad to let you know that following this major update to version...</p>
+                                          <a href="#" class="btn btn-primary">Read more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                          <div class="carousel-item">
+                            <div class="row">
+                                <div class="col-12 col-md-6 col-xl-3 mb-4">
+                                    <div class="card mr-3">
+                                        <img src="https://themesberg.s3.us-east-2.amazonaws.com/public/posts/bootstrap-themes-summer-sale.jpg" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                          <h5 class="card-title">35% discount for premium Bootstrap Themes, Templates, UI Kits</h5>
+                                          <p class="card-text">We’re getting nearer to the end of summer and because we know that this period can make a serious dent in your pocket..</p>
+                                          <a href="#" class="btn btn-primary">Read more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-3 mb-4">
+                                    <div class="card mr-3">
+                                        <img src="https://themesberg.s3.us-east-2.amazonaws.com/public/posts/gpt-3-tailwind-css-code-generator.jpg" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                          <h5 class="card-title">We built an OpenAI powered Tailwind CSS code generator using GPT-3</h5>
+                                          <p class="card-text">A couple of days ago we got access to the OpenAI’s Beta API platform and I had the occasion to play around with it...</p>
+                                          <a href="#" class="btn btn-primary">Read more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-3 mb-4">
+                                    <div class="card mr-3">
+                                        <img src="https://themesberg.s3.us-east-2.amazonaws.com/public/posts/bootstrap-5-tutorial/bootstrap-5-tutorial.jpg" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                          <h5 class="card-title">Bootstrap 5 tutorial: learn how to get started without jQuery</h5>
+                                          <p class="card-text">We’re getting nearer to the end of summer and because we know that this period can make a serious dent in your pocket..</p>
+                                          <a href="#" class="btn btn-primary">Read more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                                <div class="col-12 col-md-6 col-xl-3 mb-4">
+                                    <div class="card mr-3">
+                                        <img src="https://themesberg.s3.us-east-2.amazonaws.com/public/posts/angular-10/angular-10-officially-released-dropping-ie-9-10.jpg" class="card-img-top" alt="...">
+                                        <div class="card-body">
+                                          <h5 class="card-title">Angular 10 officially released deprecating support for IE 9 and 10</h5>
+                                          <p class="card-text">If you’ve been using Angular for your web projects I’m glad to let you know that following this major update to version...</p>
+                                          <a href="#" class="btn btn-primary">Read more</a>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                  </div>
+              </div>
+          </div>
+        <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js" integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+        <script src="https://stackpath.bootstrapcdn.com/bootstrap/5.0.0-alpha1/js/bootstrap.min.js" integrity="sha384-oesi62hOLfzrys4LxRF63OJCXdXDipiYWBnvTl9Y9/TRlw5xlKIEHpNyvvDShgf/" crossorigin="anonymous"></script>
+        </div>
+        <!-- blog ends  -->
+        <!-- price chart satrts  -->
+       <!-- paste this snippet where you want your comment box to show up -->
+
+      <!-- price chart ends  -->
+
+      <!-- about ends  -->
+
+    <%- include('common/footer'); -%>
+</body>
+</html>

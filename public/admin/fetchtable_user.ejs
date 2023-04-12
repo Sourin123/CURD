@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-GLhlTQ8iRABdZLl6O3oVMWSktQOp6b7In1Zl3/Jr59b6EGGoI1aFkw7cmDA6j6gD" crossorigin="anonymous">
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha1/dist/js/bootstrap.bundle.min.js" integrity="sha384-w76AqPfDkMBDXo30jS1Sgez6pr3x5MlQ1ZAGC+nuZB+EYdgRZgiwxhTBTkF7CXvN" crossorigin="anonymous"></script>
+
+    <title>Document</title>
+</head>
+<body>
+    <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-app.js"></script>  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-firestore.js"></script>  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-auth.js"></script>  <script src="https://www.gstatic.com/firebasejs/8.6.1/firebase-storage.js"></script>
+    <h1 class="text-center my3 mb3"><%= title %></h1>
+    <div class="container">
+        
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">uid</th>
+            <th scope="col">first Name</th>
+            <th scope="col">last Name</th>
+            <th scope="col">Address</th>
+            <th scope="col">gender </th>
+            <th scope="col">username</th>
+            <th width="200px">Email</th>
+         
+          </tr>
+        </thead>
+        <tbody>
+          <% if(data.length){
+         
+          for(var i = 0; i< data.length; i++) {%>  
+          <tr>
+            <th scope="row"><%= (i+1) %></th>
+            <td><%= data[i].F_name%></td>
+            <td><%= data[i].L_name%></td>
+            <td><%= data[i].Address%></td>
+            <td><%= data[i].Gender%></td>
+            <td><%= data[i].username%></td>
+            <td><%= data[i].email%></td>
+            <td>
+            <a class="btn btn-success edit" href="../users/edit/<%=data[i].id%>">Edit</a>                                            
+           </td>
+          </tr>
+          <% }
+                   
+           }else{ %>
+               <tr>
+                  <td colspan="3">No user</td>
+               </tr>
+            <% } %>    
+          
+        </tbody>
+        </table>
+        
+    </div>
+</body>
+</html>
