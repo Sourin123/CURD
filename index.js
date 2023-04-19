@@ -212,7 +212,14 @@ app.get('/about',function(req,res){
     }
 });
 
-
+app.get('/contact_us',function(req,res){
+  if (req.session.loggedin == true) {
+    res.render(__dirname+"/public/contect_us/index.ejs" , {token : true});
+    
+    } else {
+    res.render(__dirname+"/public/contect_us/index.ejs" , {token : false});
+    }
+});
 
 
 app.get('/deperment',function(req,res,next){
