@@ -36,7 +36,8 @@ app.use(cookieParser());
 
 
 //Source: https://stackoverflow.com/questions/17755147
-app.get('/', function(req, res, next) {
+app.get('/',(req,res)=>res.render(__dirname+"/public/welcome_page/index.ejs"));
+app.get('/home', function(req, res, next) {
   if (req.session.loggedin == true) {
 	res.render(__dirname+"/public/index.ejs" , {token : true});
 	
@@ -159,12 +160,12 @@ app.post("/signout" ,function(req,res,next){
   username = null;
   password = null;
 
-	res.redirect("/");
+	res.redirect("/home");
 });
 
 app.get("/signup",function(req,res,next){
   if (req.session.loggedin == true) {
-     res.redirect("/");
+     res.redirect("/home");
   } else {
     res.render(__dirname+"/public/signup/index.ejs",{token: false});
   }
