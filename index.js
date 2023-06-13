@@ -7,6 +7,7 @@ const sessions = require('express-session');
 const router = express.Router();
 const { name } = require("ejs");
 const cookieParser = require("cookie-parser");
+const { redirect } = require("express/lib/response");
 app.use( express.static(__dirname+"public" ) );
 // const commentBox = require('commentbox.io');
 
@@ -211,6 +212,39 @@ app.get('/about',function(req,res){
     } else {
     res.render(__dirname+"/public/about/index.ejs" , {token : false});
     }
+});
+
+
+//booking
+app.get('/book',function(req,res){
+  console.log(req.query.doc);
+  let doctor = req.query.doc ;
+  let dep = req.query.dep;
+  if (req.session.loggedin == true) {
+    res.render(__dirname+"/public/book/index.ejs" , {token : true , doctor : doctor , department : dep});
+    
+    } else {
+    res.render(__dirname+"/public/book/index.ejs" , {token : false , doctor : doctor , department : dep});
+    }
+});
+
+app.post('/book',function(req,res,next){
+  var full_name = req.body.name;
+  // var ph_no = req.body.phone;
+  var doctor = req.body.doctor;
+  var department = req.body.department;
+  var date = req.body.date;
+
+
+  database.query('INSERT INTO `booking` (`user_name`, `doc_name`, `dept_name`, `appontment_date`) VALUES (?,?,?,?);',[full_name,doctor,department,date], (err,results,fields)=>{
+    if(err) {
+     return console.log(err)
+    }
+    res.redirect('/home');
+    return console.log(results);
+  });
+  
+
 });
 
 app.get('/contact_us',function(req,res){
