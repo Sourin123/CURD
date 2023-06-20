@@ -40,7 +40,7 @@
             <td><%= data[i].username%></td>
             <td><%= data[i].email%></td>
             <td>
-            <a class="btn btn-success edit" href="../users/edit/<%=data[i].id%>">Edit</a>                                            
+            <a class="btn btn-success edit" href="../users/edit/?id=<%=data[i].id%>&Fname=<%=data[i].F_name%>&Lname=<%=data[i].L_name%>&Address=<%=data[i].Address%>&gender=<%=data[i].Gender%>&email=<%=data[i].email%>">Edit</a>                                            
            </td>
           </tr>
           <% }

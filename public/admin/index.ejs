@@ -23,6 +23,7 @@
     body,
     html {
       height: 100%;
+      background-image: linear-gradient(to top, #fbc2eb 0%, #a6c1ee 100%);
     }
     /* workaround modal-open padding issue */
     
@@ -129,7 +130,7 @@
           <i class="fa fa-user fa-5x"></i>
         </div>
         <h6 class="text-uppercase">Users</h6>
-        <h1 class="display-1">134</h1>
+        <h1 class="display-1"><%= amount[0].number%></h1>
       </div>
     </div>
   </div>
@@ -140,7 +141,7 @@
           <i class="fa fa-list fa-4x"></i>
         </div>
         <h6 class="text-uppercase">Doctors</h6>
-        <h1 class="display-1">12></h1>
+        <h1 class="display-1"><%= amount[1].number%></h1>
       </div>
     </div>
   </div>
@@ -151,7 +152,7 @@
           <i class="fa fa-twitter fa-5x"></i>
         </div>
         <h6 class="text-uppercase">Departments</h6>
-        <h1 class="display-1"> 12</h1>
+        <h1 class="display-1"><%= amount[2].number%></h1>
       </div>
     </div>
   </div>
@@ -162,13 +163,13 @@
           <i class="fa fa-share fa-5x"></i>
         </div>
         <h6 class="text-uppercase">Admins</h6>
-        <h1 class="display-1">36</h1>
+        <h1 class="display-1"><%= amount[3].number%></h1>
       </div>
     </div>
   </div>
 </div>
 <!--/row-->
 </div>
-<%- include('./fetchtable_user.ejs'); -%>
+<%- include('./fetchtable_user.ejs') %>
 
 </body>

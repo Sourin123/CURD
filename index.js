@@ -1,3 +1,4 @@
+const mailer = require(__dirname+"/nodeMailer");
 const express = require("express");
 const app = express();
 const port = process.env.PORT||3000;
@@ -46,22 +47,35 @@ app.get('/home', function(req, res, next) {
 	res.render(__dirname+"/public/index.ejs" , {token : false});
   }
 });
-app.get('/test', function(req, res, next) {
-
-      
-  database.query('SELECT * FROM user',function(err,rows)     {
-  
-         if(err){
-          console.log('error', err); 
-          res.render(__dirname+'/public/admin/fetchtable_user.ejs',{title:"Users - Node.js",data:'',error:err});   
-         }else{
-             
-             res.render(__dirname+"/public/admin/fetchtable_user.ejs",{title:"Users - Node.js",data:rows});
+app.get('/admin', function(req, res, next) {
+      var amount ;
+      database.query('Select count( `doc_id` ) as number FROM doctor UNION ALL SELECT count( user_id ) FROM user UNION all SELECT COUNT( dept_id ) FROM department UNION all SELECT COUNT( Admin_id ) from admin',function(err , result){
+        if (err) {
+          console.log(err);
          }
+         database.query('SELECT * FROM user',function(err,rows){
+          if(err){
+                    console.log('error', err); 
+          }
+
+        res.render(__dirname+'/public/admin/index.ejs',{ amount : result , data:rows , title:"User Table"});
+         });
+
+        });
+      
+      
+  //      {
+  
+  //        
+  //         res.render(__dirname+'/public/admin/fetchtable_user.ejs',{title:"Users - Node.js",data:'',error:err});   
+  //        }else{
+             
+  //            res.render(__dirname+"/public/admin/fetchtable_user.ejs",{title:"Users - Node.js",data:rows});
+  //        }
                              
-          });
+  //         });
          
-     });
+    } );
 
      app.get('/doctor',function(req,res,next){
       database.query('select * from doctor,department where doctor.dept_id = department.dept_id; ',function(error,rows){
@@ -272,6 +286,10 @@ app.get('/deperment',function(req,res,next){
   });
 });
 app.get('/subcription',(req,res)=> res.render('./public/subcripsion/index.ejs'));
+
+
+app.get('/forget_pass',(req,res)=> res.render(__dirname+'/public/common/forgot.ejs'));
+
 
 app.listen(port, function () {
     console.log("it is running in port no ", port );
