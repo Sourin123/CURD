@@ -1,4 +1,4 @@
-const mailer = require(__dirname+"/nodeMailer");
+// const mailer = require(__dirname+"/nodeMailer");
 const express = require("express");
 const app = express();
 const port = process.env.PORT||3000;
@@ -10,10 +10,30 @@ const { name } = require("ejs");
 const cookieParser = require("cookie-parser");
 const { redirect } = require("express/lib/response");
 app.use( express.static(__dirname+"public" ) );
-// const commentBox = require('commentbox.io');
+const nodemailer = require("nodemailer");
 
-// commentBox('5668783830073344-proj');
+const transpoter = nodemailer.createTransport({
+    service : "gmail",
+    auth : {
+        user : "testu0292@gmail.com",
+        pass : "ljykkbtmyliprbfz"
+    }
+});
+function mailing(toUser, subjectString , textString) {
+let mailoption = {
+    from : 'admin<testu0292@gmail.com>',
+    to : toUser,
+    subject : subjectString,
+    text :textString
+}   
 
+transpoter.sendMail(mailoption , function(err,info){
+    if (err) {
+        console.log(err);
+    }
+    console.log('email is send ... ' + info.response);
+});
+}
 
 
 
@@ -289,6 +309,30 @@ app.get('/subcription',(req,res)=> res.render('./public/subcripsion/index.ejs'))
 
 
 app.get('/forget_pass',(req,res)=> res.render(__dirname+'/public/common/forgot.ejs'));
+app.post('/forget_pass',function(req,res,next){
+ var email = req.body.email;
+ database.query('select * from user where email = ?',[email],function(error, result){
+  if (error) {
+    console.log(error);
+  }
+  let rows = Object.values(JSON.parse(JSON.stringify(result)));
+  // rows.forEach((v) => console.log(v));
+  // console.log(rows[0].password)
+  // mailer.sendMail({
+  //   from: '"admin" <admin@example.com>', // sender address
+  //   to: email, // list of receivers
+  //   subject: "Hear is your pasword", // Subject line
+  //   text: "your password is "+rows[0].password, // plain text body
+  //   html: "<b>Hello world?</b>", // html body
+  // });
+  var SubjectString  = " your Password" ;
+ var  PasswordString = "your forgotten password is  : " + rows[0].password + " Please Try to Remember it "  ;
+ console.log(rows[0].password)
+ mailing(email , SubjectString, PasswordString );
+ res.redirect('/signin');
+ });
+ 
+ });
 
 
 app.listen(port, function () {
