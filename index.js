@@ -8,11 +8,12 @@ const sessions = require('express-session');
 const router = express.Router();
 const { name } = require("ejs");
 const cookieParser = require("cookie-parser");
-const { redirect } = require("express/lib/response");
+const { redirect, cookie } = require("express/lib/response");
 app.use( express.static(__dirname+"public" ) );
 const nodemailer = require("nodemailer");
 const crypto = require('crypto');
 const { flatten } = require("express/lib/utils");
+const { ifError } = require("assert");
 
 const transpoter = nodemailer.createTransport({
     service : "gmail",
@@ -40,8 +41,9 @@ transpoter.sendMail(mailoption , function(err,info){
 
 
 function generateRandomString(length) {
-  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+';
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&';
   let randomString = '';
+  
 
   for (let i = 0; i < length; i++) {
     const randomIndex = crypto.randomInt(0, characters.length);
@@ -51,6 +53,18 @@ function generateRandomString(length) {
   return randomString;
 }
 
+function generateRandomint(length) {
+  const characters = '0123456789';
+  let randomString = '';
+  
+
+  for (let i = 0; i < length; i++) {
+    const randomIndex = crypto.randomInt(0, characters.length);
+    randomString += characters.charAt(randomIndex);
+  }
+
+  return randomString;
+}
 // Example usage
 
 
@@ -244,6 +258,49 @@ app.post("/signout" ,function(req,res,next){
 	res.redirect("/home");
 });
 
+app.get('/doctor_login',(req,res)=> res.render(__dirname+"/public/login/doctor.ejs"));
+ let docToken = false;
+app.post('/doctor_login',function(req,res,next){
+  var doc_id =req.body.doc_id;
+  // var password = req.body.password;
+  database.query('select * from doctor where doc_id = ?',[doc_id],function(err,rows,next){
+    if (err) {
+      console.log(err);
+      res.send('<h1>Theres ome error </h1> ');
+    }
+    else
+    {
+      let data = Object.values(JSON.parse(JSON.stringify(rows)));
+      // res.cookie('docDetail', data);
+     
+      // req.session.docToken = true;
+      docToken = true;
+      console.log(data[0]);
+      res.redirect('/doc_dashbord?doc_id='+doc_id+'&doc_name='+data[0].doc_name);
+    }
+  });
+});
+
+app.get('/doc_dashbord',function(req,res,next){
+  if(docToken = false){
+    res.redirect('/doctor_login');
+  }
+  else{
+    var doc_name = req.query.doc_name;
+    var doc_id = req.query.doc_id;
+    // console.log(doc_id)
+    database.query('SELECT * FROM `doctor` WHERE doc_id = ?',[doc_id],function(err,result1){
+      let rows = Object.values(JSON.parse(JSON.stringify(result1)));
+      database.query('select * from booking where doc_name = ?',[rows[0].doc_name],function(err,result2){
+        res.render(__dirname + "/public/profile/doctorProfile.ejs",{ data : result1, userData : result2 });
+      });
+    });
+    
+  }
+});
+
+
+
 app.get("/signup",function(req,res,next){
   if (req.session.loggedin == true) {
      res.redirect("/home");
@@ -257,7 +314,7 @@ app.post("/signup", function(req,res){
   var L_name = req.body.L_name;
   var Gender = req.body.Gender;
   var Country = req.body.Country;
-  var username = req.body.username;
+  var dob = req.body.dob;
   var email= req.body.email;
   var mobile = req.body.Mobile;
   var H_no = req.body.H_no;
@@ -266,10 +323,11 @@ app.post("/signup", function(req,res){
   var pin = req.body.pin;
   var Addrrss = H_no+","+add1+" State: "+add2+"  P.I.N. :"+pin;
   var password = generateRandomString(15);
+  var username = F_name+'@'+generateRandomint(4);
   
   
 
-database.query('INSERT INTO `user` ( `F_name`, `L_name`, `email`, `Address`, `Country`, `password`, `Gender`, `username`,`mobile_no`) VALUES (?,?,?,?,?,?,?,?,?);',[F_name,L_name,email,Addrrss,Country,password,Gender,username,mobile], (err,results,fields)=>{
+database.query('INSERT INTO `user` ( `F_name`, `L_name`, `email`, `Address`, `Country`, `password`, `Gender`, `username`,`mobile_no`,`dob`) VALUES (?,?,?,?,?,?,?,?,?,?);',[F_name,L_name,email,Addrrss,Country,password,Gender,username,mobile,dob], (err,results,fields)=>{
 if (err) {
   return console.log(err);
 }
