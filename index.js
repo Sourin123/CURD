@@ -11,6 +11,8 @@ const cookieParser = require("cookie-parser");
 const { redirect } = require("express/lib/response");
 app.use( express.static(__dirname+"public" ) );
 const nodemailer = require("nodemailer");
+const crypto = require('crypto');
+const { flatten } = require("express/lib/utils");
 
 const transpoter = nodemailer.createTransport({
     service : "gmail",
@@ -37,6 +39,22 @@ transpoter.sendMail(mailoption , function(err,info){
 
 
 
+function generateRandomString(length) {
+  const characters = 'ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789!@#$%^&*()_+';
+  let randomString = '';
+
+  for (let i = 0; i < length; i++) {
+    const randomIndex = crypto.randomInt(0, characters.length);
+    randomString += characters.charAt(randomIndex);
+  }
+
+  return randomString;
+}
+
+// Example usage
+
+
+
 const oneDay = 1000 * 60 * 60 ;
 app.use(sessions({
     secret: "thisismysecrctekeyfhrgfgrfrty84fwir767",
@@ -51,7 +69,7 @@ app.use(bodyParer.urlencoded({ extended: false }));
 app.use(express.urlencoded({ extended: true }));
 app.use(cookieParser());
 
-
+let adminToken = false ;
 
 
 
@@ -67,21 +85,49 @@ app.get('/home', function(req, res, next) {
 	res.render(__dirname+"/public/index.ejs" , {token : false});
   }
 });
+
+app.get('/admin_login', function(req,res,next){
+    res.render(__dirname+'/public/login/admin_login.ejs');
+});
+
+app.get('/logout',function(req,res,next){
+  adminToken = false ;
+res.redirect('/admin') });
+app.post('/admin_login' , function(req,res,next){
+  var username = req.body.u ; 
+  var password  = req.body.p;
+
+  
+  database.query('select * from admin where Admin_name = ? and Admin_pass = ? ;',[username , password],function(err ,rows){
+    if (err) {
+      console.log(err);
+
+    }
+    else{
+      adminToken = true ; 
+      res.redirect('/admin');
+    }
+  });
+});
+
 app.get('/admin', function(req, res, next) {
-      var amount ;
-      database.query('Select count( `doc_id` ) as number FROM doctor UNION ALL SELECT count( user_id ) FROM user UNION all SELECT COUNT( dept_id ) FROM department UNION all SELECT COUNT( Admin_id ) from admin',function(err , result){
-        if (err) {
-          console.log(err);
-         }
-         database.query('SELECT * FROM user',function(err,rows){
-          if(err){
-                    console.log('error', err); 
-          }
+   if (adminToken != true) {
+     res.redirect('/admin_login');
+   }  
+  else{
+            database.query('Select count( `doc_id` ) as number FROM doctor UNION ALL SELECT count( user_id ) FROM user UNION all SELECT COUNT( dept_id ) FROM department UNION all SELECT COUNT( Admin_id ) from admin',function(err , result){
+            if (err) {
+              console.log(err);
+              }
+              database.query('SELECT * FROM user',function(err,rows){
+              if(err){
+                        console.log('error', err); 
+              }
 
-        res.render(__dirname+'/public/admin/index.ejs',{ amount : result , data:rows , title:"User Table"});
-         });
+            res.render(__dirname+'/public/admin/index.ejs',{ amount : result , data:rows , title:"User Table"});
+              });
 
-        });
+            });}
       
       
   //      {
@@ -214,27 +260,24 @@ app.post("/signup", function(req,res){
   var username = req.body.username;
   var email= req.body.email;
   var mobile = req.body.Mobile;
-  var pass1 = req.body.pass1;
-  var pass2 = req.body.pass2;
   var H_no = req.body.H_no;
   var add1 = req.body.add1;
   var add2 = req.body.add2;
   var pin = req.body.pin;
   var Addrrss = H_no+","+add1+" State: "+add2+"  P.I.N. :"+pin;
-  var password = "";
-  if (pass1 == pass2) {
-    password = pass1;
-  }
-  else{
-    res.send("passwords are not same");
-  }
+  var password = generateRandomString(15);
+  
   
 
 database.query('INSERT INTO `user` ( `F_name`, `L_name`, `email`, `Address`, `Country`, `password`, `Gender`, `username`,`mobile_no`) VALUES (?,?,?,?,?,?,?,?,?);',[F_name,L_name,email,Addrrss,Country,password,Gender,username,mobile], (err,results,fields)=>{
 if (err) {
   return console.log(err);
 }
-res.redirect('/');
+var SubjectString = 'user detail';
+var textString = 'welcome user , \n This your user detail '+F_name+' '+L_name+' please put this detail in login page to login out website \n  Your Username is : '+username+ ' and Your Password is :'+ password +'  And Your user id you will find it in your profile page '+'\n thanks for visiting our website' ;
+
+mailing(email ,SubjectString , textString );
+res.redirect('/home');
 return console.log(results);
 });
 

@@ -1,0 +1,39 @@
+<table class="table">
+    <thead>
+      <tr>
+        <th scope="col">uid</th>
+        <th scope="col">first Name</th>
+        <th scope="col">last Name</th>
+        <th scope="col">Address</th>
+        <th scope="col">gender </th>
+        <th scope="col">username</th>
+        <th width="200px">Email</th>
+     
+      </tr>
+    </thead>
+    <tbody>
+      <% if(data.length){
+     
+      for(var i = 0; i< data.length; i++) {%>  
+      <tr>
+        <th scope="row"><%= (i+1) %></th>
+        <td><%= data[i].F_name%></td>
+        <td><%= data[i].L_name%></td>
+        <td><%= data[i].Address%></td>
+        <td><%= data[i].Gender%></td>
+        <td><%= data[i].username%></td>
+        <td><%= data[i].email%></td>
+        <td>
+        <a class="btn btn-success edit" href="../users/edit/?id=<%=data[i].id%>&Fname=<%=data[i].F_name%>&Lname=<%=data[i].L_name%>&Address=<%=data[i].Address%>&gender=<%=data[i].Gender%>&email=<%=data[i].email%>">Edit</a>                                            
+       </td>
+      </tr>
+      <% }
+               
+       }else{ %>
+           <tr>
+              <td colspan="3">No user</td>
+           </tr>
+        <% } %>    
+      
+    </tbody>
+    </table>
