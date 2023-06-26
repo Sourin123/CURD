@@ -355,6 +355,7 @@ app.get('/book',function(req,res){
   console.log(req.query.doc);
   let doctor = req.query.doc ;
   let dep = req.query.dep;
+
   if (req.session.loggedin == true) {
     res.render(__dirname+"/public/book/index.ejs" , {token : true , doctor : doctor , department : dep});
     
@@ -369,9 +370,10 @@ app.post('/book',function(req,res,next){
   var doctor = req.body.doctor;
   var department = req.body.department;
   var date = req.body.date;
+  var email = req.body.email ;
 
 
-  database.query('INSERT INTO `booking` (`user_name`, `doc_name`, `dept_name`, `appontment_date`) VALUES (?,?,?,?);',[full_name,doctor,department,date], (err,results,fields)=>{
+  database.query('INSERT INTO `booking` (`user_name`, `doc_name`, `dept_name`, `appontment_date`,`user_email`) VALUES (?,?,?,?,?);',[full_name,doctor,department,date, email], (err,results,fields)=>{
     if(err) {
      return console.log(err)
     }

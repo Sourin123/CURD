@@ -16,10 +16,13 @@
     "nodemailer": "^6.9.3",
     "nodemon": "^2.0.22",
     "path": "^0.12.7",
-    "port": "^0.8.1"
+    "peer": "^1.0.0",
+    "port": "^0.8.1",
+    "socket.io": "^4.7.0"
   },
   "scripts": {
-    "test": "nodemon index.js"
+    "test": "nodemon index.js",
+    "server" : "node server.js"
   },
   "author": "sourin saha",
   "license": "ISC"

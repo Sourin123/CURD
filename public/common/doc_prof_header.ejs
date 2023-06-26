@@ -1,0 +1,98 @@
+<style>
+    body {
+    color: #3d3e44;
+    font-family: "Hind", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    -webkit-font-feature-settings: "kern", "liga", "pnum";
+    font-feature-settings: "kern", "liga", "pnum";
+    font-size: .9rem;
+    line-height: 1.7;
+    min-height: 100vh;
+    min-width: 320px; 
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale; 
+}
+
+/*Typography*/
+h1, h2, h3, h4, h5, h6, .h1, .h2, .h3, .h4, .h5, .h6 {
+    font-family: "Hind", "Calibre", "Helvetica Neue", "Helvetica", "Arial", sans-serif;
+    -webkit-font-feature-settings: "kern", "liga", "pnum";
+    font-feature-settings: "kern", "liga", "pnum";
+    -webkit-font-smoothing: antialiased;
+    color: #ffffff;
+}
+/*Page Header*/
+.header-hero {
+    position: relative;
+    z-index: 2;
+    overflow: hidden;
+    background-color: #212835;
+}
+.hero-wrapper {
+    padding: 90px 0;
+}
+.header-hero .hero-bg {
+    position: absolute;
+    top: 0px;
+    width: 100%;
+    height: 110%;
+    background-size: cover !important;
+    background-repeat: no-repeat !important;
+    background-position: center center !important;
+    -webkit-transform: translateZ(0);
+    transform: translateZ(0);
+    -webkit-backface-visibility: hidden;
+    backface-visibility: hidden;
+    -webkit-perspective: 1000;
+    perspective: 1000;
+    z-index: -1;
+}
+.header-hero .overlay {
+    position: absolute;
+    top: 0px;
+    left: 0px;
+    width: 100%;
+    height: 100%;
+    /* background-image: -webkit-gradient(linear,left top, right bottom,from(#002f4b),to(#dc4225));
+    background-image: linear-gradient(to bottom right,#002f4b,#dc4225); */
+    opacity: .9; 
+} 
+
+.header-hero .entry-header h1 { 
+    line-height: 70px;
+    letter-spacing: .5px;
+    font-weight: 500;
+    font-style: normal;
+    color: #fff;
+    font-size: 40px;
+}
+
+.header-hero .entry-header p {
+    font-size: 18px;
+    color: #b7bde0;
+    font-weight: 300; 
+    line-height: 1.55em;
+    margin: 0px auto;
+}
+</style>
+
+<section class="header-hero hfeed site">
+    <div class="hero-wrapper">
+      <div class="hero-bg" style="background: url(https://img.freepik.com/free-photo/young-handsome-physician-medical-robe-with-stethoscope_1303-17818.jpg)"></div>
+      <div class="overlay"></div>
+      <div class="container">
+        <div class="row">
+          <div class="col-md-7">
+            <header class="entry-header">
+              <h1 class="page-title" style="color: #fff; z-index: 100 ;">  <%= data[0].doc_name %>  </h1>
+              <p class="" style="color: antiquewhite; z-index: 100;"> <%= data[0].doc_hospital%></p>
+              <!-- <div style="display: flex; align-items: end;"> -->
+              
+            <!-- </div> -->
+            </header>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="breadcrumbs-wrapper-line"></div>
+  </section>
+  

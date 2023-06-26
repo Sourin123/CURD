@@ -1,34 +1,37 @@
-<table class="table">
-    <thead>
-      <tr>
-        <th scope="col">booking id</th>
-        <th scope="col">user Name</th>
-        <th scope="col">under doctor</th>
-        <th scope="col">date</th>
-        
-     
-      </tr>
-    </thead>
-    <tbody>
-      <% if(userData.length){
-     
-      for(var i = 0; i< userData.length; i++) {%>  
-      <tr>
-        <td><%= userData[i].booking_id %></td>
-        <td><%= userData[i].username %></td>
-        <td><%= userData[i].doctor %></td>
-        <td><%= userData[i].appontment_date %></td>
-        
-        <td>
-        <a class="btn btn-success edit" href="">Edit</a>                                            
-       </td>
-      </tr>
-      <% }
-               
-       }else{ %>
-           <tr>
-              <td colspan="3">No user</td>
-           </tr>
-        <% } %>    
-    </tbody>
+<table class="table" >
+  <thead>
+    <tr class="table-primary" >
+      <th scope="col">booking id</th>
+      <th scope="col">user Name</th>
+      <th scope="col"> email </th>
+      <th scope="col">under doctor</th>
+      <th scope="col">date</th>
+      <th scope="col"></th>
+      
+   
+    </tr>
+  </thead>
+  <tbody>
+    <% if(userData.length){
+   
+    for(var i = 0; i< userData.length; i++) {%>  
+    <tr>
+      <td><%= userData[i].booking_id %></td>
+      <td><%= userData[i].user_name %></td>
+      <td><%= userData[i].User_email %></td>
+      <td><%= userData[i].doc_name %></td>
+      <td><%= userData[i].appontment_date %></td>
+      
+      <td>
+      <a class="btn btn-success edit" href="">start meeting</a>                                            
+     </td>
+    </tr>
+    <% }
+             
+     }else{ %>
+         <tr>
+            <td colspan="3">No user</td>
+         </tr>
+      <% } %>    
+  </tbody>
 </table>
