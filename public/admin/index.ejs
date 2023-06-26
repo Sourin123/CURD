@@ -120,7 +120,7 @@
             <span aria-hidden="true">×</span>
             <span class="sr-only">Close</span>
         </button>
-  <strong>Holy guacamole!</strong> It's free.. this is an example theme.
+  
 </div>
 
 <div class="row mb-3">
@@ -130,8 +130,9 @@
         <div class="rotate">
           <i class="fa fa-user fa-5x"></i>
         </div>
+        <a href="/admin/user" style="text-decoration: none; color: aliceblue;">
         <h6 class="text-uppercase">Users</h6>
-        <h1 class="display-1"><%= amount[0].number%></h1>
+        <h1 class="display-1"><%= amount[0].number%></h1> </a>
       </div>
     </div>
   </div>
@@ -141,8 +142,9 @@
         <div class="rotate">
           <i class="fa fa-list fa-4x"></i>
         </div>
+        <a href="/admin/doctor" style="text-decoration: none; color: aliceblue;">
         <h6 class="text-uppercase">Doctors</h6>
-        <h1 class="display-1"><%= amount[1].number%></h1>
+        <h1 class="display-1"><%= amount[1].number%></h1> </a>
       </div>
     </div>
   </div>
@@ -152,8 +154,9 @@
         <div class="rotate">
           <i class="fa fa-twitter fa-5x"></i>
         </div>
+        <a href="/admin/department" style="text-decoration: none; color: aliceblue;">
         <h6 class="text-uppercase">Departments</h6>
-        <h1 class="display-1"><%= amount[2].number%></h1>
+        <h1 class="display-1"><%= amount[2].number%></h1></a>
       </div>
     </div>
   </div>
@@ -163,14 +166,15 @@
         <div class="rotate">
           <i class="fa fa-share fa-5x"></i>
         </div>
+        <a href="/admin/ceo" style="text-decoration: none; color: aliceblue;">
         <h6 class="text-uppercase">Admins</h6>
-        <h1 class="display-1"><%= amount[3].number%></h1>
+        <h1 class="display-1"><%= amount[3].number%></h1></a>
       </div>
     </div>
   </div>
 </div>
 <!--/row-->
 </div>
-<%- include('./fetchtable_user.ejs') %>
+
 
 </body>

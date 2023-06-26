@@ -1,0 +1,53 @@
+<%- include('./index.ejs') %>
+<div class="container">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">doc_id</th>
+            <th scope="col">Doctor's Name</th>
+            <th scope="col">From Hospital</th>
+            <th scope="col">Degree</th>
+            <th scope="col">Department </th>
+            <th scope="col">rateing</th>
+           
+         
+          </tr>
+        </thead>
+        <tbody>
+          <% if(data.length){
+         
+          for(var i = 0; i< data.length; i++) {%>  
+          <tr>
+            <th scope="row"><%= data[i].doc_id %></th>
+            <td><%= data[i].doc_name%></td>
+            <td><%= data[i].doc_hospital%></td>
+            <td><%= data[i].doc_degree%></td>
+            <td><%= data[i].dept_name %> (<%= data[i].dept_id %>) </td>
+            <td><%= data[i].rateing%></td>
+           
+            <td>
+            <a class="btn btn-success edit" href="">Edit</a>                                            
+           </td>
+          </tr>
+          <% }
+                   
+           }else{ %>
+               <tr>
+                  <td colspan="3">No user</td>
+               </tr>
+            <% } %>    
+          <tr>
+            <form action="" method="post" style="opacity: 50%;">
+            <td></td>
+            <td><input type="text" name="doc_name" class="input-group-text" placeholder="Doctor's name" ></td>
+            <td><input type="text" name="doc_hospital" class="input-group-text" placeholder="Hospital's name"></td>
+            <td><input type="text" name="doc_degree" class="input-group-text" placeholder="Doctor's degree"></td>
+            <td><input type="text" name="dept_id" class="input-group-text" placeholder="Department's ID"></td>
+            <td><input type="text" name="doc_rateing" class="input-group-text" placeholder="Genaral Rateing"></td>
+            <td><input type="submit" value="submit" class="btn btn-success edit"></td>
+        </form>
+            </tr>
+        </tbody>
+        </table>
+    
+      </div>

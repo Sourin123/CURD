@@ -143,19 +143,90 @@ app.get('/admin', function(req, res, next) {
 
             });}
       
-      
-  //      {
-  
-  //        
-  //         res.render(__dirname+'/public/admin/fetchtable_user.ejs',{title:"Users - Node.js",data:'',error:err});   
-  //        }else{
-             
-  //            res.render(__dirname+"/public/admin/fetchtable_user.ejs",{title:"Users - Node.js",data:rows});
-  //        }
-                             
-  //         });
          
     } );
+
+    app.get('/admin/user', function(req, res, next) {
+      if (adminToken != true) {
+        res.redirect('/admin_login');
+      }  
+     else{
+               database.query('Select count( `doc_id` ) as number FROM doctor UNION ALL SELECT count( user_id ) FROM user UNION all SELECT COUNT( dept_id ) FROM department UNION all SELECT COUNT( Admin_id ) from admin',function(err , result){
+               if (err) {
+                 console.log(err);
+                 }
+                 database.query('SELECT * FROM user',function(err,rows){
+                 if(err){
+                           console.log('error', err); 
+                 }
+   
+               res.render(__dirname+'/public/admin/adminUser.ejs',{ amount : result , data:rows , title:"User Table"});
+                 });
+   
+               });}
+         
+            
+       } );
+
+       app.get('/admin/doctor', function(req, res, next) {
+        if (adminToken != true) {
+          res.redirect('/admin_login');
+        }  
+       else{
+                 database.query('Select count( `doc_id` ) as number FROM doctor UNION ALL SELECT count( user_id ) FROM user UNION all SELECT COUNT( dept_id ) FROM department UNION all SELECT COUNT( Admin_id ) from admin',function(err , result){
+                 if (err) {
+                   console.log(err);
+                   }
+                   database.query('select * from doctor,department where doctor.dept_id = department.dept_id;',function(err,rows){
+                   if(err){
+                             console.log('error', err); 
+                   }
+     
+                 res.render(__dirname+'/public/admin/adminDoctor.ejs',{ amount : result , data:rows , title:"User Table"});
+                   });
+     
+                 });}
+           
+              
+         } );
+
+
+         app.get('/admin/addDoctors', function(req, res, next) {
+          if (adminToken != true) {
+            res.redirect('/admin_login');
+          }  
+         else{
+                   database.query('Select count( `doc_id` ) as number FROM doctor UNION ALL SELECT count( user_id ) FROM user UNION all SELECT COUNT( dept_id ) FROM department UNION all SELECT COUNT( Admin_id ) from admin',function(err , result){
+                   if (err) {
+                     console.log(err);
+                     }
+                     database.query('select * from doctor,department where doctor.dept_id = department.dept_id;',function(err,rows){
+                     if(err){
+                               console.log('error', err); 
+                     }
+       
+                   res.render(__dirname+'/public/admin/adminAddDoctor.ejs',{ amount : result , data:rows , title:"User Table"});
+                     });
+       
+                   });}
+             
+                
+           } );
+
+        app.post('/admin/addDoctors',function(req,res,next){
+          var doc_name = req.body.doc_name;
+          var doc_hospital = req.body.doc_hospital;
+          var doc_degree = req.body.doc_degree;
+          var dept_id = req.body.dept_id;
+          var doc_rateing = req.body.doc_rateing;
+          database.query('INSERT INTO `doctor` (`doc_name`, `doc_degree`, `doc_hospital`, `dept_id`, `rateing`) VALUES(?,?,?,?,?)',[doc_name,doc_degree,doc_hospital,dept_id,doc_rateing],function(err ,rows){
+              if(err){
+                 console.log(err);
+                }
+                res.redirect('/admin/addDoctors');
+          });
+
+        });
 
      app.get('/doctor',function(req,res,next){
       database.query('select * from doctor,department where doctor.dept_id = department.dept_id; ',function(error,rows){
