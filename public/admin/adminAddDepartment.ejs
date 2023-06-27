@@ -1,0 +1,45 @@
+<%- include('./index.ejs') %>
+<div class="container">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Dept_ID</th>
+            <th scope="col">Department's Name</th>
+            
+           
+         
+          </tr>
+        </thead>
+        <tbody>
+          <% if(data.length){
+         
+          for(var i = 0; i< data.length; i++) {%>  
+          <tr>
+            <th scope="row"><%= data[i].dept_id %></th>
+            <td><%= data[i].dept_name%></td>
+           
+           
+            <td>
+            <a class="btn btn-success edit" href="">Edit</a>                                            
+           </td>
+          </tr>
+          <% }
+                   
+           }else{ %>
+               <tr>
+                  <td colspan="3">No user</td>
+               </tr>
+            <% } %>    
+          <tr>
+            <form action="" method="post">
+                <td></td>
+                <td><input type="text" name="dept_name" required class="input-group-text" placeholder="Enter Department's name"></td>
+                <td> <input class="form-control" aria-label="With textarea" name = "dept_about" placeholder="Description "  required ></td>
+                <td><input type="submit" value="submit" class="btn btn-success edit"></td>
+                </form>
+            
+            </tr>
+        </tbody>
+        </table>
+    
+      </div>

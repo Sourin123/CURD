@@ -228,6 +228,60 @@ app.get('/admin', function(req, res, next) {
 
         });
 
+        app.post('/admin/addDepartment',function(req,res,next){
+          var dept_name = req.body.dept_name;
+          var dept_about = req.body.dept_about;
+          database.query('INSERT INTO `department` (`dept_name`, `dept_about`) VALUES (?,?);',[dept_name,dept_about],function(err,rows){
+            if (err) {
+              console.log(err);
+            }
+            res.redirect('/admin/addDepartment');
+          });
+        });
+
+        app.get('/admin/department', function(req,res){
+          if (adminToken != true) {
+            res.redirect('/admin_login');
+          }  
+         else{
+                   database.query('Select count( `doc_id` ) as number FROM doctor UNION ALL SELECT count( user_id ) FROM user UNION all SELECT COUNT( dept_id ) FROM department UNION all SELECT COUNT( Admin_id ) from admin',function(err , result){
+                   if (err) {
+                     console.log(err);
+                     }
+                     database.query('select * from department;',function(err,rows){
+                     if(err){
+                               console.log('error', err); 
+                     }
+       
+                   res.render(__dirname+'/public/admin/adminDetartment.ejs',{ amount : result , data:rows , title:"User Table"});
+                     });
+       
+                   });}
+             
+        });
+
+        app.get('/admin/addDepartment', function(req,res){
+          if (adminToken != true) {
+            res.redirect('/admin_login');
+          }  
+         else{
+                   database.query('Select count( `doc_id` ) as number FROM doctor UNION ALL SELECT count( user_id ) FROM user UNION all SELECT COUNT( dept_id ) FROM department UNION all SELECT COUNT( Admin_id ) from admin',function(err , result){
+                   if (err) {
+                     console.log(err);
+                     }
+                     database.query('select * from department;',function(err,rows){
+                     if(err){
+                               console.log('error', err); 
+                     }
+       
+                   res.render(__dirname+'/public/admin/adminAddDepartment.ejs',{ amount : result , data:rows , title:"User Table"});
+                     });
+       
+                   });}
+             
+        });
+
+
      app.get('/doctor',function(req,res,next){
       database.query('select * from doctor,department where doctor.dept_id = department.dept_id; ',function(error,rows){
         if (error) {
