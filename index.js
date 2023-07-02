@@ -182,7 +182,7 @@ app.get('/admin', function(req, res, next) {
                              console.log('error', err); 
                    }
      
-                 res.render(__dirname+'/public/admin/adminDoctor.ejs',{ amount : result , data:rows , title:"User Table"});
+                 res.render(__dirname+'/public/admin/adminDoctor.ejs',{ amount : result , data:rows , title:"Doctor's Table"});
                    });
      
                  });}
@@ -205,7 +205,7 @@ app.get('/admin', function(req, res, next) {
                                console.log('error', err); 
                      }
        
-                   res.render(__dirname+'/public/admin/adminAddDoctor.ejs',{ amount : result , data:rows , title:"User Table"});
+                   res.render(__dirname+'/public/admin/adminAddDoctor.ejs',{ amount : result , data:rows , title:"Doctor' Table"});
                      });
        
                    });}
@@ -228,16 +228,7 @@ app.get('/admin', function(req, res, next) {
 
         });
 
-        app.post('/admin/addDepartment',function(req,res,next){
-          var dept_name = req.body.dept_name;
-          var dept_about = req.body.dept_about;
-          database.query('INSERT INTO `department` (`dept_name`, `dept_about`) VALUES (?,?);',[dept_name,dept_about],function(err,rows){
-            if (err) {
-              console.log(err);
-            }
-            res.redirect('/admin/addDepartment');
-          });
-        });
+      
 
         app.get('/admin/department', function(req,res){
           if (adminToken != true) {
@@ -253,7 +244,7 @@ app.get('/admin', function(req, res, next) {
                                console.log('error', err); 
                      }
        
-                   res.render(__dirname+'/public/admin/adminDetartment.ejs',{ amount : result , data:rows , title:"User Table"});
+                   res.render(__dirname+'/public/admin/adminDetartment.ejs',{ amount : result , data:rows , title:"Department's Table"});
                      });
        
                    });}
@@ -274,13 +265,23 @@ app.get('/admin', function(req, res, next) {
                                console.log('error', err); 
                      }
        
-                   res.render(__dirname+'/public/admin/adminAddDepartment.ejs',{ amount : result , data:rows , title:"User Table"});
+                   res.render(__dirname+'/public/admin/adminAddDepartment.ejs',{ amount : result , data:rows , title:"Department's Table"});
                      });
        
                    });}
              
         });
 
+        app.post('/admin/addDepartment',function(req,res,next){
+          var dept_name = req.body.dept_name;
+          var dept_about = req.body.dept_about;
+          database.query('INSERT INTO `department` (`dept_name`, `dept_about`) VALUES (?,?);',[dept_name,dept_about],function(err,rows){
+            if (err) {
+              console.log(err);
+            }
+            res.redirect('/admin/addDepartment');
+          });
+        });
 
      app.get('/doctor',function(req,res,next){
       database.query('select * from doctor,department where doctor.dept_id = department.dept_id; ',function(error,rows){
@@ -297,26 +298,6 @@ app.get('/admin', function(req, res, next) {
       });
     });
 
-     app.get("/in",(req,res)=> res.sendFile(__dirname+"/public/data.html"));
-app.post("/in", function(req,res){
-	var dname = String(req.body.dname);
-  var gender = req.body.gender;
-  var deperment = req.body.deperment;
-  var hospital = req.body.hospital;
-  var degree = req.body.degree;
-  
-	
-console.log(dname);
-	database.query('INSERT INTO `DOCTOR` ( `DNAME`, `GENDER`, `QUALIFICATION`, `JOB_SPECIFICATION`, `HOSP_NAME`) VALUES(?,?,?,?,?); ',[dname,gender,degree,deperment,hospital], (err,results,fields)=>{
-		if (err) {
-		  return console.log(err);
-		}
-		res.sendFile(__dirname+"/public/data.html");
-		return console.log(results);
-		});
-
-
-});
 let username , password;
 app.get("/signin",function(req,res,next){
   if (req.session.loggedin == true) {
@@ -544,15 +525,7 @@ app.post('/forget_pass',function(req,res,next){
     console.log(error);
   }
   let rows = Object.values(JSON.parse(JSON.stringify(result)));
-  // rows.forEach((v) => console.log(v));
-  // console.log(rows[0].password)
-  // mailer.sendMail({
-  //   from: '"admin" <admin@example.com>', // sender address
-  //   to: email, // list of receivers
-  //   subject: "Hear is your pasword", // Subject line
-  //   text: "your password is "+rows[0].password, // plain text body
-  //   html: "<b>Hello world?</b>", // html body
-  // });
+  
   var SubjectString  = " your Password" ;
  var  PasswordString = "your forgotten password is  : " + rows[0].password + " Please Try to Remember it "  ;
  console.log(rows[0].password)
