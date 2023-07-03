@@ -1,0 +1,47 @@
+<%- include('./index.ejs') %>
+<div class="container">
+    <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">admin_id</th>
+            <th scope="col">Admin's Name</th>
+            <th scope="col">Role</th>
+       
+           
+         
+          </tr>
+        </thead>
+        <tbody>
+          <% if(data.length){
+         
+          for(var i = 0; i< data.length; i++) {%>  
+          <tr>
+            <th scope="row"><%= data[i].admin_id %></th>
+            <td><%= data[i].Admin_name%></td>
+            <td><%= data[i].role %></td>
+          
+            <td>
+            <a class="btn btn-success edit" href="">Edit</a>                                            
+           </td>
+          </tr>
+          <% }
+                   
+           }else{ %>
+               <tr>
+                  <td colspan="3">No user</td>
+               </tr>
+            <% } %>    
+            <tr>
+            <form action="" method="post">
+                <td></td>
+                <td><input type="text" name="admin_name" required class="input-group-text" placeholder="Enter Admin's name"></td>
+                <td> <input class="form-control" aria-label="With textarea" name = "role" placeholder="role"  required ></td>
+                <td><input type="email" name="admin_email" required class="input-group-text" placeholder="Enter Admin's email"></td>
+                <td><input type="submit" value="submit" class="btn btn-success edit"></td>
+                </form>
+            
+            </tr>
+        </tbody>
+        </table>
+    
+      </div>

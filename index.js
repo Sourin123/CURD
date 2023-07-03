@@ -106,7 +106,10 @@ app.get('/admin_login', function(req,res,next){
 
 app.get('/logout',function(req,res,next){
   adminToken = false ;
-res.redirect('/admin') });
+res.redirect('/admin') 
+});
+
+
 app.post('/admin_login' , function(req,res,next){
   var username = req.body.u ; 
   var password  = req.body.p;
@@ -283,6 +286,67 @@ app.get('/admin', function(req, res, next) {
           });
         });
 
+
+        app.get('/admin/ceo', function(req,res){
+          if (adminToken != true) {
+            res.redirect('/admin_login');
+          }  
+         else{
+                   database.query('Select count( `doc_id` ) as number FROM doctor UNION ALL SELECT count( user_id ) FROM user UNION all SELECT COUNT( dept_id ) FROM department UNION all SELECT COUNT( Admin_id ) from admin',function(err , result){
+                   if (err) {
+                     console.log(err);
+                     }
+                     database.query('select * from admin;',function(err,rows){
+                     if(err){
+                               console.log('error', err); 
+                     }
+       
+                   res.render(__dirname+'/public/admin/adminceo.ejs',{ amount : result , data:rows , title:"Admin's Table"});
+                     });
+       
+                   });}
+             
+        });
+
+        app.get('/admin/addceo', function(req,res){
+          if (adminToken != true) {
+            res.redirect('/admin_login');
+          }  
+         else{
+                   database.query('Select count( `doc_id` ) as number FROM doctor UNION ALL SELECT count( user_id ) FROM user UNION all SELECT COUNT( dept_id ) FROM department UNION all SELECT COUNT( Admin_id ) from admin',function(err , result){
+                   if (err) {
+                     console.log(err);
+                     }
+                     database.query('select * from admin;',function(err,rows){
+                     if(err){
+                               console.log('error', err); 
+                     }
+       
+                   res.render(__dirname+'/public/admin/adminAddceo.ejs',{ amount : result , data:rows , title:"admin's Table"});
+                     });
+       
+                   });}
+             
+        });
+
+        app.post('/admin/addceo',function(req,res,next){
+          var admin_name = req.body.admin_name;
+          var role = req.body.role;
+          var email = req.body.admin_email;
+          var password = generateRandomint(8);
+          database.query('INSERT INTO `admin` ( `Admin_name`, `Admin_pass`, `role`) VALUES ( ?,?,?);',[admin_name,password,role],function(err,rows){
+            if (err) {
+              console.log(err);
+            }
+            var url  = '<a href="http://localhost:3000/admin"> click here</a>'
+            var msg ="hi "+admin_name+" ,\n \t your adminnistrial account has been created your name is your login id i.e.:  "+admin_name+"   and your password is :"+password+" ,  \n don't shearer  this detail with anyone  " + url;
+            mailing(email , "hallo new user", msg);
+            res.redirect('/admin/addceo');
+          });
+        });
+
+
+        
      app.get('/doctor',function(req,res,next){
       database.query('select * from doctor,department where doctor.dept_id = department.dept_id; ',function(error,rows){
         if (error) {
