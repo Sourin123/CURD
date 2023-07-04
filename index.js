@@ -522,6 +522,7 @@ app.get('/about',function(req,res){
 
 //booking
 app.get('/book',function(req,res){
+ 
   console.log(req.query.doc);
   let doctor = req.query.doc ;
   let dep = req.query.dep;
@@ -530,7 +531,8 @@ app.get('/book',function(req,res){
     res.render(__dirname+"/public/book/index.ejs" , {token : true , doctor : doctor , department : dep});
     
     } else {
-    res.render(__dirname+"/public/book/index.ejs" , {token : false , doctor : doctor , department : dep});
+    // res.render(__dirname+"/public/book/index.ejs" , {token : false , doctor : doctor , department : dep});
+    res.redirect('/signin');
     }
 });
 
